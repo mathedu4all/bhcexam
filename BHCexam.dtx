@@ -1,0 +1,413 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2011 by Charles Bao <charley792@gmail.com>
+%
+% This file is part of the BHCexam package project.
+% ---------------------------------------------------
+%
+% It may be distributed under the conditions of the LaTeX Project Public
+% License, either version 1.2 of this license or (at your option) any
+% later version. The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+%<*!(cfg|fd)>
+% \fi
+%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+%
+% \CheckSum{0}
+%
+% \iffalse meta-comment
+%</!(cfg|fd)>
+%
+%<*driver>
+\ProvidesFile{BHCexam.dtx}
+%</driver>
+%
+%<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+%<cls>\ProvidesClass{BHCexam}
+%<cfg>\ProvidesFile{BHCexam.cfg}
+  [2011/07/16 v0.0 BHCexam
+%<cls>   document class]
+%<cfg>   configuration file]
+%
+%<*driver>
+   bundle source file]
+%</driver>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{ctex}
+\usepackage{hyperref}
+ \topmargin 1 true cm
+ \oddsidemargin 2.5 true cm
+ \evensidemargin 2.5 true cm
+ \textheight 21 true cm
+ \textwidth 14 true cm
+\EnableCrossrefs
+ %\DisableCrossrefs % Say \DisableCrossrefs if index is ready
+\CodelineIndex
+\RecordChanges      % Gather update information
+ %\OnlyDescription  % comment out for implementation details
+ %\OldMakeindex     % use if your MakeIndex is pre-v2.9
+\hypersetup{colorlinks,linkcolor=blue,citecolor=blue}
+\begin{document}
+  \DocInput{BHCexam.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+%
+% \changes{v0.0}{2011/07/16}{Initial version}
+%
+%
+% \DoNotIndex{\begin,\end,\begingroup,\endgroup}
+% \DoNotIndex{\ifx,\ifdim,\ifnum,\ifcase,\else,\or,\fi}
+% \DoNotIndex{\let,\def,\xdef,\newcommand,\renewcommand}
+% \DoNotIndex{\expandafter,\csname,\endcsname,\relax,\protect}
+% \DoNotIndex{\Huge,\huge,\LARGE,\Large,\large,\normalsize}
+% \DoNotIndex{\small,\footnotesize,\scriptsize,\tiny}
+% \DoNotIndex{\normalfont,\bfseries,\slshape,\interlinepenalty}
+% \DoNotIndex{\hfil,\par,\vskip,\vspace,\quad}
+% \DoNotIndex{\centering,\raggedright}
+% \DoNotIndex{\c@secnumdepth,\@startsection,\@setfontsize}
+% \DoNotIndex{\ ,\@plus,\@minus,\p@,\z@,\@m,\@M,\@ne,\m@ne}
+% \DoNotIndex{\@@par}
+%
+%
+% \GetFileInfo{BHCexam.dtx}
+%
+%
+% \MakeShortVerb{\|}
+% \setcounter{StandardModuleDepth}{1}
+%
+%
+% \newcommand{\ctex}{\texttt{ctex}}
+% \newcommand{\BHCexam}{\texttt{BHCexam}}
+%
+%
+% \setlength{\parskip}{0.75ex plus .2ex minus .5ex}
+% \renewcommand{\baselinestretch}{1.2}
+%
+%
+% \makeatletter
+% \def\parg#1{\mbox{$\langle${\it #1\/}$\rangle$}}
+% \def\@smarg#1{{\tt\string{}\parg{#1}{\tt\string}}}
+% \def\@marg#1{{\tt\string{}{\rm #1}{\tt\string}}}
+% \def\marg{\@ifstar\@smarg\@marg}
+% \def\@soarg#1{{\tt[}\parg{#1}{\tt]}}
+% \def\@oarg#1{{\tt[}{\rm #1}{\tt]}}
+% \def\oarg{\@ifstar\@soarg\@oarg}
+% \makeatother
+%
+%
+% \title{\bf \BHCexam~宏包说明\thanks
+%   {本文件版本号为~\fileversion{}，最后修改日期~\filedate{}。}}
+% \author{\it 鲍宏昌\thanks{charley792@gmail.com}}
+% \date{\small 打印日期：~\today}
+% \maketitle
+%
+%
+% \begin{abstract}
+% \BHCexam~宏包提供了一个中学教学设计的~\LaTeX{}~文档类，
+%
+% \BHCexam~主要文件包括~\texttt{BHCexam.cls}~文档类和配置文件~\texttt{BHCexam.cfg}。
+%
+% \BHCexam~宏包由~鲍宏昌~制作并负责维护。
+% \end{abstract}
+%
+%
+% \tableofcontents
+%
+%
+% \section{简介}
+%
+% TODO
+%
+%
+% \section{使用帮助}
+%
+% TODO
+%
+%
+% \subsection{选项}
+%
+% TODO
+%
+%
+% \subsection{基本命令}
+%
+% TODO
+%
+%
+%
+%
+% \StopEventually{
+% } ^^A end StopEventually
+%
+% \section{源代码说明}
+%
+% \subsection{选项}
+%
+% 处理~\BHCexam~文档类的选项
+%
+% \begin{macro}{[(no)marginl]}
+% 是否有装订线
+%    \begin{macrocode}
+%<*cls>
+\newif\if@marginline \@marginlinefalse
+\DeclareOption{marginl}{\@marginlinetrue}
+\DeclareOption{nomarginl}{\@marginlinefalse}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{[16kpapaper]}
+% 16k纸张大小设置,默认选项为a4paper
+%    \begin{macrocode}
+%<*cls>
+\DeclareOption{16kpaper}
+ {\setlength\paperheight {260mm}
+  \setlength\paperwidth  {184mm}}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+% 把没有定义的选项传递给底层的文档类,并加载缺省的文档类
+%    \begin{macrocode}
+%<cls>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
+%<cls>\ProcessOptions
+%<cls>\LoadClass[addpoints]{exam}
+%    \end{macrocode}
+%
+% \subsection{宏包}
+%
+% 装入常用的宏包
+%    \begin{macrocode}
+%<*cls>
+\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm}
+\RequirePackage{graphicx}
+\RequirePackage{picins}
+\RequirePackage{ifthen}
+\RequirePackage{ctex}
+%</cls>
+%    \end{macrocode}
+%
+% \subsection{外观}
+%
+% 页眉、页脚设置
+%    \begin{macrocode}
+%<*cls>
+\extraheadheight{-0.5in}
+\pagestyle{headandfoot}
+%\runningheadrule
+%\firstpageheadrule
+%\runningfootrule
+%\firstpagefootrule
+\header{}{}{}
+\footer{}{\small \kaishu{\@kemu}\quad 第~\thepage~页(共~\numpages~页)}{}
+%</cls>
+%    \end{macrocode}
+%
+% 装订线
+%    \begin{macrocode}
+%<*cls>
+\if@marginline
+\extrawidth{-0.5in}
+\newsavebox{\zdx}
+\sbox{\zdx}{
+  \begin{minipage}{412pt}
+    \kaishu \centering
+    班级\underline{\hspace{3cm}}学号\underline{\hspace{3cm}}姓名\underline{\hspace{3cm}}
+
+    \vspace{3mm}
+    \dotfill{}装\dotfill{}订\dotfill{}线\dotfill{}
+  \end{minipage}
+}
+%\reversemarginpar
+%\marginpar{
+%  \begin{minipage}{10mm}
+%    \vspace{5cm} 
+%    \rotatebox[origin=c]{90}{\usebox{\zdx}}
+%  \end{minipage}
+%}
+\fi
+%</cls>
+%    \end{macrocode}
+%
+% \begin{macro}{\biaoti}
+% \begin{macro}{\kemu}
+% 标题
+%    \begin{macrocode}
+%<*cfg>
+\def\@biaoti{2011年全国普通高等学校招生统一考试(上海卷)}
+\def\@kemu{数学(理科)}
+%</cfg>
+%<*cls>
+\newcommand\biaoti[1]{\def\@biaoti{#1}}
+\newcommand\kemu[1]{\def\@kemu{#1}}
+\renewcommand\maketitle{
+  \begin{center}{\heiti \Large{\@biaoti}}\end{center}
+  \begin{center}{\heiti \Large{\@kemu}}\end{center}
+}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\xuzhi}
+% \begin{macro}{\duanxz}
+% \begin{macro}{\shexuzhi}
+% 考试须知
+%    \begin{macrocode}
+%<*cfg>
+\def\@shijian{120}
+\def\@zongfen{150}
+\def\@tishu{23}
+%</cfg>
+%<*cls>
+\newcommand\shexuzhi[3]{
+  \def\@shijian{#1}
+  \def\@zongfen{#2}
+  \def\@tishu{#3}
+}
+\newcommand\duanxz{
+  \begin{center}{
+    \kaishu (本试卷满分~\@zongfen~分, 考试时间~\@shijian~分钟)}
+  \end{center}
+}
+\newcommand\xuzhi{
+  \begin{flushleft}
+    \heiti 
+    考生注意：
+    \begin{enumerate}
+      \item 答卷前，考生务必在答题纸上将班级、姓名、学号填写清楚.
+      \item 本试卷共有~\@tishu~道试题，满分~\@zongfen~分，考试~\@shijian~分钟.
+    \end{enumerate}
+  \end{flushleft}
+}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{格式}
+%
+% 缩进
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\choiceshook}{%
+\settowidth{\leftmargin}{22.~~}%
+}
+\renewcommand{\partshook}{%
+\settowidth{\leftmargin}{22.~~}%
+}
+%</cls>
+%    \end{macrocode}
+%
+% 标号
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\thepartno}{\arabic{partno}}
+\renewcommand{\partlabel}{(\thepartno)}
+%</cls>
+%    \end{macrocode}
+%
+% 计分
+%    \begin{macrocode}
+%<*cls>
+\pointname{分}
+\pointformat{\kaishu (\thepoints)}
+%</cls>
+%    \end{macrocode}
+%
+% 填空题、选择题、简答题
+%    \begin{macrocode}
+%<*cfg>
+\def\@tiankong@zongfen{56}
+\def\@tiankong@tishu{14}
+\def\@tiankong@fen{4}
+\def\@xuanze@zongfen{16}
+\def\@xuanze@tishu{4}
+\def\@xuanze@fen{4}
+\def\@jianda@zongfen{74}
+\def\@jianda@tishu{5}
+%</cfg>
+%<*cls>
+\newcounter{@dati}
+\newcommand\shetk[3]{
+  \def\@tiankong@zongfen{#1}
+  \def\@tiankong@tishu{#2}
+  \def\@tiankong@fen{#3}
+}
+\newcommand\tiankong{
+  \stepcounter{@dati} 
+  \fullwidth{\heiti \chinese{@dati}~~填空题(\kaishu 本大题满分~\@tiankong@zongfen~分)~\heiti 本大题有~\@tiankong@tishu~题，考生应在答题纸相应编号的空格内直接写结果，每个空格填对得~\@tiankong@fen~分，否则一律得零分.}
+}
+\newcommand\shexz[3]{
+  \def\@xuanze@zongfen{#1}
+  \def\@xuanze@tishu{#2}
+  \def\@xuanze@fen{#3}
+}
+\newcommand\xuanze{
+  \stepcounter{@dati} 
+  \fullwidth{\heiti \chinese{@dati}.~~选择题(\kaishu 本大题满分~\@xuanze@zongfen~分)~\heiti 本大题共有~\@xuanze@tishu~题，每题有且只有一个正确答案，考生应在答题纸的相应编号上，将代表答案的小方格涂黑，选对得~\@xuanze@fen~分，否则一律得零分.}
+}
+\newcommand\shejd[2]{
+  \def\@jianda@zongfen{#1}
+  \def\@jianda@tishu{#2}
+}
+\newcommand\jianda{
+  \qformat{\hskip\labelsep \kaishu \thequestion.~~(本题满分~\totalpoints~分)\hfill}
+  \stepcounter{@dati}
+  \fullwidth{\heiti \chinese{@dati}.~~简答题(\kaishu 本大题满分~\@jianda@zongfen~分)~\heiti 本大题共有~\@jianda@tishu~题，解答下列各题必须在答题纸相应的编号规定区域内写出必要的步骤.}
+}
+%</cls>
+%    \end{macricode}
+%
+% solution环境
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\solutiontitle}{\noindent\heiti{解：}\noindent}
+%</cls>
+%    \end{macrocode}
+
+% 读取配置文件
+%    \begin{macrocode}
+%<*cls>
+\AtEndOfPackage{\makeatletter\input{BHCexam.cfg}\makeatother}
+%</cls>
+%    \end{macrocode}
+%
+%
+
+% \Finale
+%
+% \setcounter{IndexColumns}{2}
+% \IndexPrologue{\section*{索引} {\it 意大利体的数字表示描述对应索引项的页码；
+%                带下划线的数字表示定义对应索引项的代码行号；
+%                罗马字体的数字表示使用对应索引项的代码行号。}}
+%
+% \GlossaryPrologue{\section*{版本更新}}
+%
+% \PrintIndex \PrintChanges
+\endinput
