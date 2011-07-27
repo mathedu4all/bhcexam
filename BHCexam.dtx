@@ -44,7 +44,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{BHCexam}
 %<cfg>\ProvidesFile{BHCexam.cfg}
-  [2011/07/16 v0.0 BHCexam
+  [2011/07/27 v0.2 BHCexam
 %<cls>   document class]
 %<cfg>   configuration file]
 %
@@ -53,12 +53,13 @@
 %</driver>
 %
 %<*driver>
-\documentclass{ltxdoc}
+\documentclass[a4paper]{ltxdoc}
 \usepackage{ctex}
 \usepackage{hyperref}
- \topmargin 1 true cm
- \oddsidemargin 2.5 true cm
- \evensidemargin 2.5 true cm
+\usepackage{amsmath,amssymb}
+ \topmargin 0.5 true cm
+ \oddsidemargin 1 true cm
+ \evensidemargin 1 true cm
  \textheight 21 true cm
  \textwidth 14 true cm
 \EnableCrossrefs
@@ -68,15 +69,17 @@
  %\OnlyDescription  % comment out for implementation details
  %\OldMakeindex     % use if your MakeIndex is pre-v2.9
 \hypersetup{colorlinks,linkcolor=blue,citecolor=blue}
-\begin{document}
-  \DocInput{BHCexam.dtx}
+\begin{document}  
+ \DocInput{BHCexam.dtx}
 \end{document}
 %</driver>
 %
 % \fi
 %
 %
-% \changes{v0.0}{2011/07/16}{Initial version}
+% \changes{v0.0}{2011/07/22}{Initial version}
+% \changes{v0.1}{2011/07/23}{version 0.1}
+% \changes{v0.2}{2011/07/27}{version 0.2}
 %
 %
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup}
@@ -102,11 +105,45 @@
 %
 % \newcommand{\ctex}{\texttt{ctex}}
 % \newcommand{\BHCexam}{\texttt{BHCexam}}
+% \newcommand{\exam}{\texttt{exam}}
+% \newcommand{\colin}{\texttt{colinexam}}
 %
 %
 % \setlength{\parskip}{0.75ex plus .2ex minus .5ex}
 % \renewcommand{\baselinestretch}{1.2}
 %
+% \newcommand{\rc}{\text{C}}
+% \newcommand{\ri}{\text{i}}
+% \newcommand{\ra}{\text{A}}
+% \newcommand{\rd}{\text{d}}
+% \renewcommand\m{\ensuremath{\text{m}}}
+% \newcommand\tian{\ensuremath{\text{d}}}
+% \newcommand\A{\ensuremath{\text{A}}}
+% \newcommand\g{\ensuremath{\text{g}}}
+% \newcommand\kg{\ensuremath{\text{kg}}}
+% \newcommand\degree{\ensuremath{^\circ}}
+% \newcommand\ssd{\ensuremath{\text{\textcelsius}}}
+% \newcommand\rad{\ensuremath{\text{rad}}}
+% \newcommand\N{\ensuremath{\text{N}}}
+% \newcommand\Pa{\ensuremath{\text{Pa}}}
+% \newcommand\J{\ensuremath{\text{J}}}
+% \newcommand\W{\ensuremath{\text{W}}}
+% \newcommand\ohm{\ensuremath{\Omega}}
+% \newcommand\mol{\ensuremath{\text{mol}}}
+% \newcommand\K{\ensuremath{\text{K}}}
+% \newcommand\h{\ensuremath{\text{h}}}
+% \newcommand\ton{\ensuremath{\text{t}}}
+% \newcommand\squarem{\ensuremath{\text{m$^2$}}}
+% \newcommand\cubicm{\ensuremath{\text{m$^3$}}}
+% \newcommand\cm{\ensuremath{\text{cm}}}
+% \newcommand\mm{\ensuremath{\text{mm}}}
+% \newcommand\squarecm{\ensuremath{\text{cm$^2$}}}
+% \newcommand\cubiccm{\ensuremath{\text{cm$^3$}}}
+% \newcommand\squaremm{\ensuremath{\text{mm$^2$}}}
+% \newcommand\cubicmm{\ensuremath{\text{mm$^3$}}}
+% \newcommand\liter{\ensuremath{\text{L}}}
+% \newcommand{\abs}[1]{\left|#1\right|}
+% \newcommand\arccot{\mathop{\text{arccot}}}
 %
 % \makeatletter
 % \def\parg#1{\mbox{$\langle${\it #1\/}$\rangle$}}
@@ -120,45 +157,258 @@
 %
 %
 % \title{\bf \BHCexam~宏包说明\thanks
-%   {本文件版本号为~\fileversion{}，最后修改日期~\filedate{}。}}
+%   {这是鲍宏昌发布的第一个~\LaTeX~宏包。本文件版本号为~\fileversion{}，最后修改日期~\filedate{}。}}
 % \author{\it 鲍宏昌\thanks{charley792@gmail.com}}
 % \date{\small 打印日期：~\today}
 % \maketitle
 %
-%
 % \begin{abstract}
-% \BHCexam~宏包提供了一个中学教学设计的~\LaTeX{}~文档类，
+% \BHCexam~宏包提供了一个中学教学设计的~\LaTeX{}~文档类。
 %
-% \BHCexam~主要文件包括~\texttt{BHCexam.cls}~文档类和配置文件~\texttt{BHCexam.cfg}。
+% \BHCexam~主要文件包括~\texttt{BHCexam.cls}~文档类和配置文件
+% ~\texttt{BHCexam.cfg}。
 %
-% \BHCexam~宏包由~鲍宏昌~制作并负责维护。
+% \BHCexam~宏包由鲍宏昌制作并负责维护。
 % \end{abstract}
 %
-%
 % \tableofcontents
-%
+% \newpage
 %
 % \section{简介}
 %
-% TODO
+% 本宏包以~\exam~为底层文档类，部分源代码来自于盖鹤麟开发的
+% ~\colin。不知道什么原因盖鹤麟自2004年就一直没有发布更新，
+% ~\colin~仍然使用CCT实现中文支持，而缺乏对~XeTeX~的支持。2011年7月，
+% 鲍宏昌在~\colin~的基础上改用~\ctex~实现中文支持，采用UTF8编码同时
+% 支持~XeLaTeX~和~pdfTeX~进行编译，并使用~\texttt{doc}~和
+% ~\texttt{docstrip}~工具编写了这个文档，增加了一些新的功能，
+% 并把新的宏包命名为~\BHCexam。
 %
+% 本宏包延续了~\colin~和~\exam~的特点，能让一个刚刚接触
+% ~\LaTeX~的初学者，也能轻松用它来排版试卷。希望~\BHCexam~能提高中学
+% 教师的工作效率，并把注意力放在试卷的内容上。
+% 
+% \BHCexam~由两个主要文件构成：文档类~\texttt{BHCexam.cls}~和配置文件
+% ~\texttt{BHCexam.cfg}~。后者定义了一些常用的参数。
+%
+% {\kaishu
+% 这两个文件可以通过用~XeLaTeX~编译~\texttt{BHCexam.ins}~文件来得到，
+% 而这份说明文档可以通过用~XeLaTeX~编译~\texttt{BHCexam.dtx}~文件来得到。
+% 编译说明文档需要~\ctex{}~宏包，为了生成正确的索引和版本记录，
+% 需要使用如下命令}
+% \begin{verbatim}
+% makeindex -s gind.ist -o BHCexam.ind BHCexam.idx
+% makeindex -s gglo.ist -o BHCexam.gls BHCexam.glo
+% \end{verbatim}
+%
+% \section{一个简单的例子}
+%
+% 用~\BHCexam~要排版一张基本的试卷其实很简单。如果你准备对试卷的排版进行
+% 更细致的设置，那么请参考~\exam~的文档。
+%
+% \subsection{\texttt{documentclass} 命令}
+% \label{sec:BasicDocumentclass}
+%
+% 要使用~\BHCexam~文档类，你的\verb"\documentclass" 命令应该是
+% \begin{verbatim}
+%  \documentclass{BHCexam}
+% \end{verbatim}
+% 如果，你想使用小四字体作为缺省字体大小，那么添加选项\verb"cs4size"
+% \begin{verbatim}
+% \documentclass[cs4size]{BHCexam}
+% \end{verbatim}
+% 更多的选项，请参考\ref{sec:Options}。
+%
+% \subsection{打印标题和考试须知}
+% \DescribeMacro{\maketitle}
+% \DescribeMacro{\notice}
+% 在试卷上打印标题和考试须知
+% \begin{verbatim}
+%   \maketitle
+%   \notice 
+% \end{verbatim}
+% 关于标题和考试须知中变量的设置，请参考\ref{sec:Variable}。
+%
+% \subsection{题目}
+% \label{sec:Example}
+% \DescribeMacro{\question}
+% \DescribeMacro{\choice}
+% \DescribeMacro{\part}
+% \DescribeMacro{\tiankong}
+% \DescribeMacro{\xuanze}
+% \DescribeMacro{\jianda}
+% 在\verb"questions"环境中用\verb"\question"输入题目。
+% 在\verb"choices"环境中用\verb"\choice"输入选项。
+% 在\verb"parts"环境中用\verb"\part"输入小问。
+% 在\verb"questions"环境中用\verb"\tiankong"、\verb"\xuanze"
+% 和\verb"\jianda"分别显示填空题、选择题、简答题的提示语。
+% \begin{verbatim}
+% \begin{questions}
+%   \tiankong
+%   \question 这是第1道填空题
+%   \question 这是第2道填空题
+%   \xuanze
+%   \question 问题3是一道选择题
+%   \begin{choices}
+%     \choice 选项1
+%     \choice 选项2
+%     \choice 选项3
+%     \choice 选项4
+%   \begin{choices}
+%   \jianda
+%   \question 问题4是一道简答题
+%   \begin{parts}
+%   \part 第1小问
+%   \part 第2小问
+%   \end{parts}
+% \end{questions}
+% \end{verbatim}
+% 关于填空题、选择题、简答题的提示语中几个变量的设置，请参考\ref{sec:Variable}。
+% 关于题目的更多内容，请参考\ref{sec:Environment}。
 %
 % \section{使用帮助}
 %
-% TODO
-%
-%
 % \subsection{选项}
+% \label{sec:Options}
 %
-% TODO
+% \changes{v0.2}{2011/07/27}{增加UTF8选项以支持pdflatex}
 %
+% 宏包的选项用于改变一些缺省的设置。虽然缺省的设置基本能过满足一般用户的
+% 使用需要，但用户也可以根据自己的情况，使用这些选项。
 %
-% \subsection{基本命令}
+% \begin{description}
+% \item[cs4size]     使用小四字号为缺省字体大小。
+% \item[c5size]      使用五号字为缺省字体大小（缺省选项）。
+% \item[answers]     在每一个问题后附上答案。
+% \item[marginline]  放置装订线。
+% \item[16kpaper]    使用16开纸张（缺省使用A4纸张）。
+% \item[noindent]    没有缩进。
+% \item[printbox]    显示评分框。
+% \item[UTF8]        用pdflatex编译时需要。
+% \end{description}
 %
-% TODO
+% \subsection{变量}
+% \label{sec:Variable}
+% \changes{v0.2}{2011/07/27}{试卷中改用英文标点符号}
+% 本宏包在题量和分值等方面均以高考试卷为模板，
+% 默认的变量值可以在\texttt{BHCexam.cfg}中设置，当然
+% 你也可以在使用相关命令之前使用以下命令进行更改。\\\\
+% \DescribeMacro{\biaoti}
+% 设置标题信息。
+% \begin{quote}
+% |\biaoti|\marg*{TEXT}
+% \end{quote}
+% \DescribeMacro{\kemu}
+% 设置科目信息，他会显示在标题下方和页脚内。
+% \begin{quote}     
+% |\kemu|\marg*{TEXT}
+% \end{quote}
+% \DescribeMacro{\xinxi}
+% 设置总分和考试时间信息，\parg{num1}为总分，\parg{num2}为考试时间。
+% \begin{quote}
+% |\xinxi|\marg*{num1}\marg*{num2}
+% \end{quote}
+% \DescribeMacro{\settk}
+% 设置填空题的总分、题量和小分信息，\parg{num1}为总分，\parg{num2}为题量，
+% \parg{num3}为小分。
+% \begin{quote}
+% |\settk|\marg*{num1}\marg*{num2}\marg*{num3}
+% \end{quote}
+% \DescribeMacro{\setxz}
+% 设置选择题的总分、题量和小分信息，\parg{num1}为总分，\parg{num2}为题量，
+% \parg{num3}为小分。
+% \begin{quote}
+% |\setxz|\marg*{num1}\marg*{num2}\marg*{num3}
+% \end{quote}
+% \DescribeMacro{\setjd}
+% 设置简答题的总分、题量和小分信息，\parg{num1}为总分，\parg{num2}为题量。
+% \begin{quote}
+% |\setjd|\marg*{num1}\marg*{num2}\marg*{num3}
+% \end{quote}
+
+% \subsection{环境}
+% \label{sec:Environment} 
+% 经常使用的环境有\verb"questions"环境、\verb"choices"环境、\verb"parts"环境，
+% 关于它们的简单介绍，请参考\ref{sec:Example}，这里做一点补充说明，
+% 更详细的介绍，请参考~\exam~文档。\\\\
+% 在排版简答题时需要用\verb"\part"命令输入各小问的分值，宏包会自动算出总分并显示在该简答题的第一行。
+% 当该道简答题没有小问时，则要用\verb"\question"命令输入该问题的分值。
+% 
+% \begin{verbatim}
+%  ...
+%  \jianda
+%  \question 这是一道简答题
+%  \begin{parts}[
+%  \part[3] 第1小问3分。
+%  \part[3] 第2小问3分。
+%  \part[3] 第3小问4分。
+%  \end{parts}
+%  \question[12] 这是一道没有小问的简答题，这道题有12分
+%  ... 
+% \end{verbatim}
+% 在\verb"\question"后新建\verb"solution"环境，在其中输入该问题的解答，
+% 在不显示答案的情况下，该问题后会预留答题空间。
+% \begin{verbatim}
+%  ...
+%  \jianda
+%  \question 这是一道简答题
+%  \begin{solution}
+%  这是解答,不显示答案的情况下则这个问题后预留答题空间。
+%  \end{solution}
+%  ... 
+% \end{verbatim}
 %
-%
-%
+% \subsection{常用命令}
+% 
+% \DescribeMacro{\newpage}
+% 每道问题的间距是弹性设置的，你只要在想换页的地方输入\verb"\newpage"命令，
+% 则上一页的各问题间距会自动调整到最美观的效果。\\
+% \DescribeMacro{\mininotice}
+% 在一行内输出精简的考试注意事项。\\
+% \DescribeMacro{\printmalol}
+% 在当前页为正面时，在左边插入装订线（仅在使用marginline选项时有效）。\\
+% \DescribeMacro{\printmalol}
+% 在当前页为反面时，在左边插入装订线（仅在使用marginline选项时有效）。\\
+
+% \subsection{数学符号}
+% \begin{tabular}{ll}
+% \hline
+% \verb"\oneb" & 生成一条很小的供排版填空题空格用的横线\\\hline
+% \verb"\twob" & 生成一条长一些的供排版填空题空格用的横线\\\hline
+% \verb"\fourb" & 生成一长更长的供排版填空题空格用的横线\\\hline
+% \verb"\sixb" & 生成一长较长的供排版填空题空格用的横线\\\hline
+% \verb"\tenb" & 生成一条很长的供排版填空题空格用的横线\\\hline
+% \verb"\rc" & 在数学模式下输入正体的~C（组合数符号）\\\hline
+% \verb"\ra" & 在数学模式下输入正体的~A（排列数符号）\\\hline
+% \verb"\ri" & 在数学模式下输入正体的~i（虚数单位）\\\hline
+% \verb"\abs{...}" & 用以输入绝对值\\\hline
+% \verb"\arccot" & 在数学模式下输入$\arccot$\\\hline
+% \verb"\m" & 在文本模式和数学模式下均可使用，生成单位符号~\m\\\hline
+% \verb"\W" & 在文本模式攻数学模式下均可使用，生成单位符号~\W\\\hline
+% \verb"\A" & 在文本模式和数学模式下均可使用，生成单位符号~\A\\ \hline
+% \verb"\g" & 在文本模式和数学模式下均可使用，生成单位符号~\g\\ \hline
+% \verb"\kg" & 在文本模式和数学模式下均可使用，生成单位符号~\kg\\ \hline
+% \verb"\degree" & 在文本模式和数学模式下均可使用，生成单位符号~\degree\\\hline
+% \verb"\ssd" & 在文本模式和数学模式下均可使用，生成单位符号~\ssd\\\hline
+% \verb"\rad" & 在文本模式和数学模式下均可使用，生成单位符号~\rad\\\hline
+% \verb"\N" & 在文本模式和数学模式下均可使用，生成单位符号~\N\\\hline
+% \verb"\Pa" & 在文本模式和数学模式下均可使用，生成单位符号~\Pa\\\hline
+% \verb"\J" & 在文本模式和数学模式下均可使用，生成单位符号~\J\\\hline
+% \verb"\ohm" & 在文本模式和数学模式下均可使用，生成单位符号~\ohm\\\hline
+% \verb"\mol" & 在文本模式和数学模式下均可使用，生成单位符号~\mol\\\hline
+% \verb"\K" & 在文本模式和数学模式下均可使用，生成单位符号~\K\\\hline
+% \verb"\h" & 在文本模式和数学模式下均可使用，生成单位符号~\h\\\hline
+% \verb"\ton" & 在文本模式和数学模式下均可使用，生成单位符号~\ton\\\hline
+% \verb"\squarem" & 在文本模式和数学模式下均可使用，生成单位符号~\squarem\\\hline
+% \verb"\cubicm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubicm\\\hline
+% \verb"\cm" & 在文本模式和数学模式下均可使用，生成单位符号~\cm\\\hline
+% \verb"\mm" & 在文本模式和数学模式下均可使用，生成单位符号~\mm\\\hline
+% \verb"\squarecm" & 在文本模式和数学模式下均可使用，生成单位符号~\squarecm\\\hline
+% \verb"\cubiccm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubiccm\\\hline
+% \verb"\squaremm" & 在文本模式和数学模式下均可使用，生成单位符号~\squaremm\\\hline
+% \verb"\cubicmm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubicmm\\\hline
+% \verb"\liter" & 在文本模式和数学模式下均可使用，生成单位符号~\liter\\\hline
+% \end{tabular}
 %
 % \StopEventually{
 % } ^^A end StopEventually
@@ -167,56 +417,133 @@
 %
 % \subsection{选项}
 %
+%\begin{macro}{\input}
+% \changes{v0.2}{2011/07/27}{改用input语句导入ctex类文件}
+% 导入ctex类的选项
+%    \begin{macrocode}
+%<*cls>
+\input{ctex-common-opts.def}
+\input{ctex-class-opts.def}
+\input{ctex-caption-opts.def}
+%</cls>
+%    \end{macrocode}
+%\end{macro}
+%
 % 处理~\BHCexam~文档类的选项
 %
-% \begin{macro}{[(no)marginl]}
+% \begin{macro}{\@sixteenkpaper}
+% 16k纸张大小设置,缺省选项为a4paper
+%    \begin{macrocode}
+%<*cls>
+\newif\if@sixteenkpaper \@sixteenkpapertrue
+\DeclareOption{16kpaper}{\@sixteenkpaperfalse}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@marginline}
 % 是否有装订线
 %    \begin{macrocode}
 %<*cls>
 \newif\if@marginline \@marginlinefalse
-\DeclareOption{marginl}{\@marginlinetrue}
-\DeclareOption{nomarginl}{\@marginlinefalse}
-%</cls>
-%    \end{macrocode}
-% \end{macro}
-% 
-% \begin{macro}{[16kpapaper]}
-% 16k纸张大小设置,默认选项为a4paper
-%    \begin{macrocode}
-%<*cls>
-\DeclareOption{16kpaper}
- {\setlength\paperheight {260mm}
-  \setlength\paperwidth  {184mm}}
+\DeclareOption{marginline}{\@marginlinetrue}
 %</cls>
 %    \end{macrocode}
 % \end{macro}
 %
-% 把没有定义的选项传递给底层的文档类,并加载缺省的文档类
+% 不缩进，缺省为缩进
+%    \begin{macrocode}
+%<*cls>
+\newif\if@noindent \@noindentfalse
+\DeclareOption{noindent}{\@noindenttrue}
+%</cls>
+%    \end{macrocode}
+%
+% 显示答案的方式，缺省不显示答案
+%    \begin{macrocode}
+%<cls>\DeclareOption{answers}{\PassOptionsToClass{\CurrentOption}{exam}}
+%    \end{macrocode}
+
+% \begin{macro}{\@printbox}
+% 显示计分框，缺省为不显示。
+%    \begin{macrocode}
+%<*cls>
+\newif\if@printbox \@printboxfalse
+\DeclareOption{printbox}{\@printboxtrue}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% 把没有定义的选项传递给缺省的文档类
 %    \begin{macrocode}
 %<cls>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
+%    \end{macrocode}
+%
+% 处理选项
+%    \begin{macrocode}
 %<cls>\ProcessOptions
+%    \end{macrocode}
+%
+% 装入缺省的文档类
+%    \begin{macrocode}
 %<cls>\LoadClass[addpoints]{exam}
 %    \end{macrocode}
-%
-% \subsection{宏包}
-%
-% 装入常用的宏包
+% 
+% 导入ctex类的实现
 %    \begin{macrocode}
 %<*cls>
-\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm}
-\RequirePackage{graphicx}
-\RequirePackage{picins}
-\RequirePackage{ifthen}
-\RequirePackage{ctex}
+\input{ctex-common.def}
+\input{ctex-caption.def}
+\input{ctex-class.def}
 %</cls>
 %    \end{macrocode}
+% \subsection{宏包}
 %
-% \subsection{外观}
-%
-% 页眉、页脚设置
+% \begin{macro}{\RequirePackage}
+% 我们需要使用的一些宏包
 %    \begin{macrocode}
 %<*cls>
-\extraheadheight{-0.5in}
+\RequirePackage{amsmath,amssymb,bm}
+\RequirePackage{graphicx}
+\RequirePackage{ifpdf,ifxetex}
+%</cls>
+%    \end{macrocode}
+% 
+% 用geometry宏包进行页面设置
+% \changes{v0.2}{2011/07/27}{改用geometry宏包实现纸张设置}
+%    \begin{macrocode}
+%<*cls>
+\if@marginline
+\if@sixteenkpaper
+\RequirePackage[papersize={184mm,260mm},hmargin={3cm,2cm},
+vmargin={2cm,2cm},marginparsep=0.5cm,hoffset=0cm,voffset=0cm,
+footnotesep=0.5cm,headsep=0.5cm,twoside]{geometry}
+\else
+\RequirePackage[paper=a4paper,hmargin={3cm,2cm},vmargin={2cm,2cm},
+marginparsep=0.5cm,hoffset=0cm,voffset=0cm,footnotesep=0.5cm,
+headsep=0.5cm,twoside]{geometry}
+\fi
+\else
+\if@sixteenkpaper
+\RequirePackage[papersize={184mm,260mm},hmargin={2cm,2cm},
+vmargin={2cm,2cm},marginparsep=0.5cm,hoffset=0cm,voffset=0cm,
+footnotesep=0.5cm,headsep=0.5cm]{geometry}
+\else
+\RequirePackage[paper=a4paper,hmargin={2cm,2cm},vmargin={2cm,2cm},
+marginparsep=0.5cm,hoffset=0cm,voffset=0cm,footnotesep=0.5cm,
+headsep=0.5cm]{geometry}
+\fi
+\fi
+%</cls>
+%    \end{macrocode}
+%\end{macro}
+%
+% \subsection{自定义设置}
+%行距、页眉、页脚
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\baselinestretch}{1.5}
 \pagestyle{headandfoot}
 %\runningheadrule
 %\firstpageheadrule
@@ -227,31 +554,119 @@
 %</cls>
 %    \end{macrocode}
 %
+% 分值显示
+%    \begin{macrocode}
+%<*cls>
+\pointname{分}
+\pointformat{\kaishu (\thepoints)}
+%</cls>
+%    \end{macrocode}
+%
+% 解的显示
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\solutiontitle}{\noindent\heiti{解：}\noindent}
+%</cls>
+%    \end{macrocode}
+%
+% 小问的显示
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\thepartno}{\arabic{partno}}
+\renewcommand{\partlabel}{(\thepartno)}
+\renewcommand{\partshook}{
+  \settowidth{\leftmargin}{(3).\hskip\labelsep}
+  \if@noindent \setlength\leftmargin{0pt} \fi
+}
+%</cls>
+%    \end{macrocode}
+%
+% 选项的显示
+%    \begin{macrocode}
+%<*cls>
+\renewcommand{\choiceshook}{
+  \settowidth{\leftmargin}{W.\hskip\labelsep}
+  \if@noindent \setlength\leftmargin{0pt} \fi
+}
+%</cls>
+%    \end{macrocode}
+%
+% 解答的显示
+%    \begin{macrocode}
+%<*cls>
+\renewenvironment{solution}%
+  {%
+    \ifprintanswers
+      \begingroup
+      \Solution@Emphasis
+      \begin{TheSolution}%
+    \else
+      \ifcancelspace
+        % Do nothing
+      \else
+        \par
+        \penalty 0
+        \vfill%
+        \if@printbox \if@houpinfen \houpinfen \fi \fi
+      \fi
+      \setbox\z@\vbox\bgroup
+    \fi
+  }{%
+    \ifprintanswers
+      \end{TheSolution}%
+      \endgroup
+    \else
+      \egroup
+    \fi
+  }%
+%</cls>
+%    \end{macrocode}
+%
+% \subsection{新的命令和环境}
+%
+% \begin{macro}{\printmlor}
+% \begin{macro}{\printmlol}
+% \changes{v0.1}{2011/07/23}{支持在首页插入装订线}
+% \changes{v0.2}{2011/07/27}{手动在指定页插入左(右)装订线}
 % 装订线
 %    \begin{macrocode}
 %<*cls>
-\if@marginline
-\extrawidth{-0.5in}
-\newsavebox{\zdx}
-\sbox{\zdx}{
-  \begin{minipage}{412pt}
-    \kaishu \centering
-    班级\underline{\hspace{3cm}}学号\underline{\hspace{3cm}}姓名\underline{\hspace{3cm}}
-
-    \vspace{3mm}
-    \dotfill{}装\dotfill{}订\dotfill{}线\dotfill{}
-  \end{minipage}
+\if@marginline 
+\newsavebox{\zdxl}
+\sbox{\zdxl}{
+\begin{minipage}{0.7\paperheight} 
+\begin{center}
+\heiti 班级\underline{\hspace{15ex}} \quad
+姓名 \underline{\hspace{15ex}} \quad
+学号 \underline{\hspace{15ex}} \quad \\ 
+\vspace{3ex}
+\dotfill 装 \dotfill 订 \dotfill 线 \dotfill 
+\end{center}
+\end{minipage}
 }
-%\reversemarginpar
-%\marginpar{
-%  \begin{minipage}{10mm}
-%    \vspace{5cm} 
-%    \rotatebox[origin=c]{90}{\usebox{\zdx}}
-%  \end{minipage}
-%}
+\newsavebox{\zdxr}
+\sbox{\zdxr}{
+\begin{minipage}{0.7\paperheight} 
+\begin{center}
+\heiti \hfill 请 \hfill 不 \hfill 要 \hfill 在 \hfill
+ 装 \hfill 订 \hfill 线 \hfill 内 \hfill 答 \hfill 题 \hfill \\ 
+\vspace{3ex}
+\dotfill 装 \dotfill 订 \dotfill 线 \dotfill 
+\end{center}
+\end{minipage}
+}
+\newcommand{\printmlol}{
+\marginpar{\rotatebox{90}{\usebox{\zdxl}}}
+}
+\newcommand{\printmlor}{
+\marginpar{\rotatebox{-90}{\usebox{\zdxr}}}
+}
+\reversemarginpar
 \fi
 %</cls>
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\biaoti}
 % \begin{macro}{\kemu}
@@ -272,73 +687,102 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-% 
-% \begin{macro}{\xuzhi}
-% \begin{macro}{\duanxz}
-% \begin{macro}{\shexuzhi}
-% 考试须知
-%    \begin{macrocode}
+%
+% \begin{macro}{\mininotice}
+% \begin{macro}{\xinxi}
+% 一行内显示考试时间和考试总分
+%    \begin{macrocode}{\mininotice}
 %<*cfg>
-\def\@shijian{120}
 \def\@zongfen{150}
-\def\@tishu{23}
+\def\@shijian{120}
 %</cfg>
 %<*cls>
-\newcommand\shexuzhi[3]{
-  \def\@shijian{#1}
-  \def\@zongfen{#2}
-  \def\@tishu{#3}
+\newcommand\xinxi[2]{
+  \def\@zongfen{#1}
+  \def\@shijian{#2}
 }
-\newcommand\duanxz{
+\newcommand\mininotice{
   \begin{center}{
     \kaishu (本试卷满分~\@zongfen~分, 考试时间~\@shijian~分钟)}
   \end{center}
 }
-\newcommand\xuzhi{
-  \begin{flushleft}
-    \heiti 
-    考生注意：
-    \begin{enumerate}
-      \item 答卷前，考生务必在答题纸上将班级、姓名、学号填写清楚.
-      \item 本试卷共有~\@tishu~道试题，满分~\@zongfen~分，考试~\@shijian~分钟.
-    \end{enumerate}
-  \end{flushleft}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\notice}
+% 注意事项
+%    \begin{macrocode}
+%<*cls>
+\newcommand{\notice}{
+  \heiti 注意事项： \songti
+  \begin{enumerate}
+  \item 答卷前, 考生务必将姓名、高考准考证号、校验码等填写清楚.
+  \item 本试卷共~\numquestions{}~道试题, 满分~\@zongfen~分,考试时间~\@shijian~分钟.
+  \end{enumerate}
 }
+%</cls>
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{\pingfen}
+% 前评分框
+%    \begin{macrocode}
+%<*cls>
+\newlength\@boxwidth
+\setlength\@boxwidth{0ex}
+\if@printbox \setlength\@boxwidth{18ex} \fi
+\newcommand\pinfen{
+  \heiti
+  \begin{minipage}{\@boxwidth}
+  \begin{tabular}{|c|c|}
+  \hline
+  得分 & 评卷人\\
+  \hline
+      &       \\ 
+  \hline
+  \end{tabular}
+  \end{minipage}
+}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\houpinfen}
+% 后评分框
+%    \begin{macrocode}
+%<*cls>
+\newcommand{\houpinfen}{
+  \hfill
+  \begin{tabular}{|l|l|}
+    \hline
+    得分 & \hspace*{1.5cm}\\
+    \hline
+  \end{tabular}
+  \bigskip
+}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\oneb}
+% \begin{macro}{\twob}
+% \begin{macro}{\sixb}
+% \begin{macro}{\tenb}
+% 空格
+%    \begin{macrocode}
+%<*cls>
+\newcommand\oneb{\underline{\hspace{1em}}\hspace{0.001em}}
+\newcommand\twob{\oneb\oneb}
+\newcommand{\sixb}{\twob\twob}
+\newcommand\tenb{\twob\twob\twob\twob\twob}
 %</cls>
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
-%
-% \subsection{格式}
-%
-% 缩进
-%    \begin{macrocode}
-%<*cls>
-\renewcommand{\choiceshook}{%
-\settowidth{\leftmargin}{22.~~}%
-}
-\renewcommand{\partshook}{%
-\settowidth{\leftmargin}{22.~~}%
-}
-%</cls>
-%    \end{macrocode}
-%
-% 标号
-%    \begin{macrocode}
-%<*cls>
-\renewcommand{\thepartno}{\arabic{partno}}
-\renewcommand{\partlabel}{(\thepartno)}
-%</cls>
-%    \end{macrocode}
-%
-% 计分
-%    \begin{macrocode}
-%<*cls>
-\pointname{分}
-\pointformat{\kaishu (\thepoints)}
-%</cls>
-%    \end{macrocode}
+% \end{macro}
 %
 % 填空题、选择题、简答题
 %    \begin{macrocode}
@@ -349,48 +793,99 @@
 \def\@xuanze@zongfen{16}
 \def\@xuanze@tishu{4}
 \def\@xuanze@fen{4}
-\def\@jianda@zongfen{74}
+\def\@jianda@zongfen{78}
 \def\@jianda@tishu{5}
 %</cfg>
 %<*cls>
 \newcounter{@dati}
-\newcommand\shetk[3]{
+\newif\if@houpinfen \@houpinfenfalse
+\newcommand\settk[3]{
   \def\@tiankong@zongfen{#1}
   \def\@tiankong@tishu{#2}
   \def\@tiankong@fen{#3}
 }
 \newcommand\tiankong{
+  \@houpinfenfalse
   \stepcounter{@dati} 
-  \fullwidth{\heiti \chinese{@dati}~~填空题(\kaishu 本大题满分~\@tiankong@zongfen~分)~\heiti 本大题有~\@tiankong@tishu~题，考生应在答题纸相应编号的空格内直接写结果，每个空格填对得~\@tiankong@fen~分，否则一律得零分.}
+  \fullwidth{
+    \if@printbox \pinfen \fi
+    \begin{minipage}{\textwidth-\@boxwidth}
+    \heiti \chinese{@dati}. 填空题(\kaishu 本大题满分~\@tiankong@zongfen~分) \heiti 本大题有~\@tiankong@tishu~题, 考生应在答题纸相应编号的空格内直接写结果, 每个空格填对得~\@tiankong@fen~分, 否则一律得零分.
+    \end{minipage}
+  }
 }
-\newcommand\shexz[3]{
+\newcommand\setxz[3]{
   \def\@xuanze@zongfen{#1}
   \def\@xuanze@tishu{#2}
   \def\@xuanze@fen{#3}
 }
 \newcommand\xuanze{
+  \@houpinfenfalse
   \stepcounter{@dati} 
-  \fullwidth{\heiti \chinese{@dati}.~~选择题(\kaishu 本大题满分~\@xuanze@zongfen~分)~\heiti 本大题共有~\@xuanze@tishu~题，每题有且只有一个正确答案，考生应在答题纸的相应编号上，将代表答案的小方格涂黑，选对得~\@xuanze@fen~分，否则一律得零分.}
+  \fullwidth{
+    \if@printbox \pinfen \fi
+    \begin{minipage}{\textwidth-\@boxwidth}  
+      \heiti \chinese{@dati}. 选择题(\kaishu 本大题满分~\@xuanze@zongfen~分) \heiti 本大题共有~\@xuanze@tishu~题, 每题有且只有一个正确答案, 考生应在答题纸的相应编号上, 将代表答案的小方格涂黑, 选对得~\@xuanze@fen~分, 否则一律得零分.
+    \end{minipage}
+  }
 }
-\newcommand\shejd[2]{
+\newcommand\setjd[2]{
   \def\@jianda@zongfen{#1}
   \def\@jianda@tishu{#2}
 }
 \newcommand\jianda{
+  \@houpinfentrue
   \qformat{\hskip\labelsep \kaishu \thequestion.~~(本题满分~\totalpoints~分)\hfill}
   \stepcounter{@dati}
-  \fullwidth{\heiti \chinese{@dati}.~~简答题(\kaishu 本大题满分~\@jianda@zongfen~分)~\heiti 本大题共有~\@jianda@tishu~题，解答下列各题必须在答题纸相应的编号规定区域内写出必要的步骤.}
+  \fullwidth{
+    \if@printbox \pinfen \fi  
+    \begin{minipage}{\textwidth-\@boxwidth}
+      \heiti \chinese{@dati}. 简答题(\kaishu 本大题满分~\@jianda@zongfen~分)~\heiti 本大题共有~\@jianda@tishu~题, 解答下列各题必须在答题纸相应的编号规定区域内写出必要的步骤.
+    \end{minipage}
+  }
 }
 %</cls>
-%    \end{macricode}
+%    \end{macrocode}
 %
-% solution环境
+% 数学运算符号、单位
 %    \begin{macrocode}
 %<*cls>
-\renewcommand{\solutiontitle}{\noindent\heiti{解：}\noindent}
-%</cls>
+\newcommand{\rc}{\text{C}}
+\newcommand{\ri}{\text{i}}
+\newcommand{\ra}{\text{A}}
+\newcommand{\rd}{\text{d}}
+\newcommand\tian{\ensuremath{\text{d}}}
+\newcommand\A{\ensuremath{\text{A}}}
+\def\m{\ensuremath{\text{m}}}
+\newcommand\g{\ensuremath{\text{g}}}
+\newcommand\kg{\ensuremath{\text{kg}}}
+\newcommand\degree{\ensuremath{^\circ}}
+\newcommand\ssd{\ensuremath{\text{\textcelsius}}}
+\newcommand\rad{\ensuremath{\text{rad}}}
+\newcommand\N{\ensuremath{\text{N}}}
+\newcommand\Pa{\ensuremath{\text{Pa}}}
+\newcommand\J{\ensuremath{\text{J}}}
+\newcommand\W{\ensuremath{\text{W}}}
+\newcommand\ohm{\ensuremath{\Omega}}
+\newcommand\mol{\ensuremath{\text{mol}}}
+\newcommand\K{\ensuremath{\text{K}}}
+\newcommand\h{\ensuremath{\text{h}}}
+\newcommand\ton{\ensuremath{\text{t}}}
+\newcommand\squarem{\ensuremath{\text{m$^2$}}}
+\newcommand\cubicm{\ensuremath{\text{m$^3$}}}
+\newcommand\cm{\ensuremath{\text{cm}}}
+\newcommand\mm{\ensuremath{\text{mm}}}
+\newcommand\squarecm{\ensuremath{\text{cm$^2$}}}
+\newcommand\cubiccm{\ensuremath{\text{cm$^3$}}}
+\newcommand\squaremm{\ensuremath{\text{mm$^2$}}}
+\newcommand\cubicmm{\ensuremath{\text{mm$^3$}}}
+\newcommand\liter{\ensuremath{\text{L}}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand\arccot{\mathop{\text{arccot}}}
+\newcommand\pingxing{\parallel}
+%<\cls>
 %    \end{macrocode}
-
+%
 % 读取配置文件
 %    \begin{macrocode}
 %<*cls>
@@ -403,11 +898,11 @@
 % \Finale
 %
 % \setcounter{IndexColumns}{2}
-% \IndexPrologue{\section*{索引} {\it 意大利体的数字表示描述对应索引项的页码；
-%                带下划线的数字表示定义对应索引项的代码行号；
-%                罗马字体的数字表示使用对应索引项的代码行号。}}
+% \IndexPrologue{\section*{索引}}
 %
 % \GlossaryPrologue{\section*{版本更新}}
 %
 % \PrintIndex \PrintChanges
 \endinput
+
+\EnableCrossrefs
