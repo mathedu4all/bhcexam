@@ -6,7 +6,8 @@ PACKAGE = BHCexam
 ##
 TEXMFDIR   = ~/texmf/tex/latex/BHCexam
 GZIP      = gzip
-PDFLATEX  = xelatex
+XELATEX  = xelatex
+PDFLATEX  = pdflatex
 MAKEINDEX = makeindex
 ########################################################################
 ## make [all]		Generates the class(.cls) file, the configuration(.cfg)
@@ -28,6 +29,7 @@ MAKEINDEX = makeindex
 
 ########################################################################
 ## make test		Run test file(s)
+## make src		Builds a src distribution (.tar.gz) file.
 ## make distribtion	Builds a distribution (.tar.gz) file.
 ########################################################################
 
@@ -38,21 +40,32 @@ install:	cls
 uninstall:	; rm $(TEXMFDIR)/$(PACKAGE).{cls,cfg}
 clean:		; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
 		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
-veryclean:	clean
-		-rm -f *.sty *.cls *.pdf *.gz *pk *.cfg
+veryclean:	; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
+		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
+		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
+		-rm -f *.sty *.cls *.pdf *pk *.cfg *.tar
 
 
-doc:		; $(PDFLATEX) $(PACKAGE).dtx
+doc:		; $(XELATEX) $(PACKAGE).dtx
 
-cls:		; $(PDFLATEX) $(PACKAGE).ins
+cls:		; $(XELATEX) $(PACKAGE).ins
 
 fulldoc:	doc $(PACKAGE).gls $(PACKAGE).ind 
-		$(PDFLATEX) $(PACKAGE).dtx
+		$(XELATEX) $(PACKAGE).dtx
 
-distribution:	; mkdir $(PACKAGE)
+src:		; mkdir $(PACKAGE)
 		cp -p README Makefile $(PACKAGE)
 		cp -p $(PACKAGE).dtx $(PACKAGE).ins $(PACKAGE)
 		cp -p test*.tex $(PACKAGE)
+		tar -cvf $(PACKAGE)-src.tar ./$(PACKAGE) 
+		rm -rf $(PACKAGE)
+		$(GZIP) -9 $(PACKAGE)-src.tar
+
+distribution:	veryclean cls fulldoc test clean
+		mkdir $(PACKAGE)
+		cp -p $(PACKAGE).cls $(PACKAGE).cfg $(PACKAGE)
+		cp -p *.tex $(PACKAGE)
+		cp -p *.pdf $(PACKAGE)
 		tar -cvf $(PACKAGE).tar ./$(PACKAGE) 
 		rm -rf $(PACKAGE)
 		$(GZIP) -9 $(PACKAGE).tar
@@ -64,5 +77,12 @@ $(PACKAGE).ind:	doc
 		$(MAKEINDEX) -s gind.ist -o $(PACKAGE).ind $(PACKAGE).idx
 
 test:		cls
-		$(PDFLATEX) test*.tex
-		$(PDFLATEX) test*.tex
+		$(XELATEX) test1.tex 
+		$(XELATEX) test1.tex 
+		$(XELATEX) test2.tex 
+		$(XELATEX) test2.tex 
+		$(XELATEX) test3.tex 
+		$(XELATEX) test3.tex 
+		$(PDFLATEX) test4.tex 
+		$(PDFLATEX) test4.tex 
+
