@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2011 by Charles Bao <charley792@gmail.com>
+% Copyright (C) 2014 by Charles Bao <charley792@gmail.com>
 %
 % This file is part of the BHCexam package project.
 % ---------------------------------------------------
@@ -44,7 +44,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{BHCexam}
 %<cfg>\ProvidesFile{BHCexam.cfg}
-  [2011/07/27 v0.2 BHCexam
+  [2014/02/18 v0.3 BHCexam
 %<cls>   document class]
 %<cfg>   configuration file]
 %
@@ -80,6 +80,7 @@
 % \changes{v0.0}{2011/07/22}{Initial version}
 % \changes{v0.1}{2011/07/23}{version 0.1}
 % \changes{v0.2}{2011/07/27}{version 0.2}
+% \changes{v0.3}{2014/02/18}{version 0.3}
 %
 %
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup}
@@ -111,39 +112,6 @@
 %
 % \setlength{\parskip}{0.75ex plus .2ex minus .5ex}
 % \renewcommand{\baselinestretch}{1.2}
-%
-% \newcommand{\rc}{\text{C}}
-% \newcommand{\ri}{\text{i}}
-% \newcommand{\ra}{\text{A}}
-% \newcommand{\rd}{\text{d}}
-% \renewcommand\m{\ensuremath{\text{m}}}
-% \newcommand\tian{\ensuremath{\text{d}}}
-% \newcommand\A{\ensuremath{\text{A}}}
-% \newcommand\g{\ensuremath{\text{g}}}
-% \newcommand\kg{\ensuremath{\text{kg}}}
-% \newcommand\degree{\ensuremath{^\circ}}
-% \newcommand\ssd{\ensuremath{\text{\textcelsius}}}
-% \newcommand\rad{\ensuremath{\text{rad}}}
-% \newcommand\N{\ensuremath{\text{N}}}
-% \newcommand\Pa{\ensuremath{\text{Pa}}}
-% \newcommand\J{\ensuremath{\text{J}}}
-% \newcommand\W{\ensuremath{\text{W}}}
-% \newcommand\ohm{\ensuremath{\Omega}}
-% \newcommand\mol{\ensuremath{\text{mol}}}
-% \newcommand\K{\ensuremath{\text{K}}}
-% \newcommand\h{\ensuremath{\text{h}}}
-% \newcommand\ton{\ensuremath{\text{t}}}
-% \newcommand\squarem{\ensuremath{\text{m$^2$}}}
-% \newcommand\cubicm{\ensuremath{\text{m$^3$}}}
-% \newcommand\cm{\ensuremath{\text{cm}}}
-% \newcommand\mm{\ensuremath{\text{mm}}}
-% \newcommand\squarecm{\ensuremath{\text{cm$^2$}}}
-% \newcommand\cubiccm{\ensuremath{\text{cm$^3$}}}
-% \newcommand\squaremm{\ensuremath{\text{mm$^2$}}}
-% \newcommand\cubicmm{\ensuremath{\text{mm$^3$}}}
-% \newcommand\liter{\ensuremath{\text{L}}}
-% \newcommand{\abs}[1]{\left|#1\right|}
-% \newcommand\arccot{\mathop{\text{arccot}}}
 %
 % \makeatletter
 % \def\parg#1{\mbox{$\langle${\it #1\/}$\rangle$}}
@@ -232,29 +200,30 @@
 % \subsection{题目}
 % \label{sec:Example}
 % \DescribeMacro{\question}
-% \DescribeMacro{\choice}
+% \DescribeMacro{\stk}
+% \DescribeMacro{\onech}
 % \DescribeMacro{\part}
-% \DescribeMacro{\tiankong}
-% \DescribeMacro{\xuanze}
-% \DescribeMacro{\jianda}
 % 在\verb"questions"环境中用\verb"\question"输入题目。
-% 在\verb"choices"环境中用\verb"\choice"输入选项。
-% 在\verb"parts"环境中用\verb"\part"输入小问。
+% 在\verb"parts"环境中用\verb"\part"输入大题的小问。
+% 用\verb"\stk"、\verb"\mtk"
+% 和\verb"\ltk"输入填空题的答案。
+% 用\verb"\onech"、\verb"\twoch"
+% 和\verb"\fourch"输入选择题的选项。
 % 在\verb"questions"环境中用\verb"\tiankong"、\verb"\xuanze"
 % 和\verb"\jianda"分别显示填空题、选择题、简答题的提示语。
 % \begin{verbatim}
 % \begin{questions}
 %   \tiankong
-%   \question 这是第1道填空题
-%   \question 这是第2道填空题
+%   \question 这是第1道填空题\stk{答案，不显示答案时显示段横线}
+%   \question 这是第2道填空题\mtk{答案，不显示答案时显示段横线}
+%   \question 这是第2道填空题\ltk{答案，不显示答案时显示段横线}
 %   \xuanze
-%   \question 问题3是一道选择题
-%   \begin{choices}
-%     \choice 选项1
-%     \choice 选项2
-%     \choice 选项3
-%     \choice 选项4
-%   \begin{choices}
+%   \question 问题3是一道选择题,四个选项显示在一行
+%   \onech{选项1}{选项2}{选项3}{选项4}
+%   \question 问题3是一道选择题,四个选项显示在两行
+%   \twoch{选项1}{选项2}{选项3}{选项4}
+%   \question 问题3是一道选择题,四个选项显示在四行
+%   \fourch{选项1}{选项2}{选项3}{选项4}
 %   \jianda
 %   \question 问题4是一道简答题
 %   \begin{parts}
@@ -298,8 +267,8 @@
 % \begin{quote}
 % |\biaoti|\marg*{TEXT}
 % \end{quote}
-% \DescribeMacro{\kemu}
-% 设置科目信息，他会显示在标题下方和页脚内。
+% \DescribeMacro{\fubiaoti}
+% 设置副标题，他会显示在标题下方。
 % \begin{quote}     
 % |\kemu|\marg*{TEXT}
 % \end{quote}
@@ -328,7 +297,7 @@
 
 % \subsection{环境}
 % \label{sec:Environment} 
-% 经常使用的环境有\verb"questions"环境、\verb"choices"环境、\verb"parts"环境，
+% 经常使用的环境有\verb"questions"环境、\verb"parts"环境，
 % 关于它们的简单介绍，请参考\ref{sec:Example}，这里做一点补充说明，
 % 更详细的介绍，请参考~\exam~文档。\\\\
 % 在排版简答题时需要用\verb"\part"命令输入各小问的分值，宏包会自动算出总分并显示在该简答题的第一行。
@@ -369,49 +338,8 @@
 % 在当前页为正面时，在左边插入装订线（仅在使用marginline选项时有效）。\\
 % \DescribeMacro{\printmalol}
 % 在当前页为反面时，在左边插入装订线（仅在使用marginline选项时有效）。\\
-
-% \subsection{数学符号}
-% \begin{tabular}{ll}
-% \hline
-% \verb"\oneb" & 生成一条很小的供排版填空题空格用的横线\\\hline
-% \verb"\twob" & 生成一条长一些的供排版填空题空格用的横线\\\hline
-% \verb"\fourb" & 生成一长更长的供排版填空题空格用的横线\\\hline
-% \verb"\sixb" & 生成一长较长的供排版填空题空格用的横线\\\hline
-% \verb"\tenb" & 生成一条很长的供排版填空题空格用的横线\\\hline
-% \verb"\rc" & 在数学模式下输入正体的~C（组合数符号）\\\hline
-% \verb"\ra" & 在数学模式下输入正体的~A（排列数符号）\\\hline
-% \verb"\ri" & 在数学模式下输入正体的~i（虚数单位）\\\hline
-% \verb"\abs{...}" & 用以输入绝对值\\\hline
-% \verb"\arccot" & 在数学模式下输入$\arccot$\\\hline
-% \verb"\m" & 在文本模式和数学模式下均可使用，生成单位符号~\m\\\hline
-% \verb"\W" & 在文本模式攻数学模式下均可使用，生成单位符号~\W\\\hline
-% \verb"\A" & 在文本模式和数学模式下均可使用，生成单位符号~\A\\ \hline
-% \verb"\g" & 在文本模式和数学模式下均可使用，生成单位符号~\g\\ \hline
-% \verb"\kg" & 在文本模式和数学模式下均可使用，生成单位符号~\kg\\ \hline
-% \verb"\degree" & 在文本模式和数学模式下均可使用，生成单位符号~\degree\\\hline
-% \verb"\ssd" & 在文本模式和数学模式下均可使用，生成单位符号~\ssd\\\hline
-% \verb"\rad" & 在文本模式和数学模式下均可使用，生成单位符号~\rad\\\hline
-% \verb"\N" & 在文本模式和数学模式下均可使用，生成单位符号~\N\\\hline
-% \verb"\Pa" & 在文本模式和数学模式下均可使用，生成单位符号~\Pa\\\hline
-% \verb"\J" & 在文本模式和数学模式下均可使用，生成单位符号~\J\\\hline
-% \verb"\ohm" & 在文本模式和数学模式下均可使用，生成单位符号~\ohm\\\hline
-% \verb"\mol" & 在文本模式和数学模式下均可使用，生成单位符号~\mol\\\hline
-% \verb"\K" & 在文本模式和数学模式下均可使用，生成单位符号~\K\\\hline
-% \verb"\h" & 在文本模式和数学模式下均可使用，生成单位符号~\h\\\hline
-% \verb"\ton" & 在文本模式和数学模式下均可使用，生成单位符号~\ton\\\hline
-% \verb"\squarem" & 在文本模式和数学模式下均可使用，生成单位符号~\squarem\\\hline
-% \verb"\cubicm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubicm\\\hline
-% \verb"\cm" & 在文本模式和数学模式下均可使用，生成单位符号~\cm\\\hline
-% \verb"\mm" & 在文本模式和数学模式下均可使用，生成单位符号~\mm\\\hline
-% \verb"\squarecm" & 在文本模式和数学模式下均可使用，生成单位符号~\squarecm\\\hline
-% \verb"\cubiccm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubiccm\\\hline
-% \verb"\squaremm" & 在文本模式和数学模式下均可使用，生成单位符号~\squaremm\\\hline
-% \verb"\cubicmm" & 在文本模式和数学模式下均可使用，生成单位符号~\cubicmm\\\hline
-% \verb"\liter" & 在文本模式和数学模式下均可使用，生成单位符号~\liter\\\hline
-% \end{tabular}
 %
-% \StopEventually{
-% } ^^A end StopEventually
+% \StopEventually{}
 %
 % \section{源代码说明}
 %
@@ -435,8 +363,8 @@
 % 16k纸张大小设置,缺省选项为a4paper
 %    \begin{macrocode}
 %<*cls>
-\newif\if@sixteenkpaper \@sixteenkpapertrue
-\DeclareOption{16kpaper}{\@sixteenkpaperfalse}
+\newif\if@sixteenkpaper \@sixteenkpaperfalse
+\DeclareOption{16kpaper}{\@sixteenkpapertrue}
 %</cls>
 %    \end{macrocode}
 % \end{macro}
@@ -474,7 +402,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
 % 把没有定义的选项传递给缺省的文档类
 %    \begin{macrocode}
 %<cls>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
@@ -504,17 +431,21 @@
 % 我们需要使用的一些宏包
 %    \begin{macrocode}
 %<*cls>
-\RequirePackage{amsmath,amssymb,bm}
-\RequirePackage{graphicx}
 \RequirePackage{ifpdf,ifxetex}
+\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,pifont,dsfont}
+\RequirePackage{mathtools}
+\RequirePackage{paralist,cases,tabularx}
+\RequirePackage{pstricks,pst-plot,xcolor,graphicx}
 %</cls>
 %    \end{macrocode}
 % 
 % 用geometry宏包进行页面设置
 % \changes{v0.2}{2011/07/27}{改用geometry宏包实现纸张设置}
+% \changes{v0.3}{2014/02/18}{修正了纸张的尺寸}
 %    \begin{macrocode}
 %<*cls>
 \if@marginline
+\marginparwidth = 2cm
 \if@sixteenkpaper
 \RequirePackage[papersize={184mm,260mm},hmargin={3cm,2cm},
 vmargin={2cm,2cm},marginparsep=0.5cm,hoffset=0cm,voffset=0cm,
@@ -530,7 +461,7 @@ headsep=0.5cm,twoside]{geometry}
 vmargin={2cm,2cm},marginparsep=0.5cm,hoffset=0cm,voffset=0cm,
 footnotesep=0.5cm,headsep=0.5cm]{geometry}
 \else
-\RequirePackage[paper=a4paper,hmargin={2cm,2cm},vmargin={2cm,2cm},
+\RequirePackage[papersize={210mm,297mm},hmargin={2cm,2cm},vmargin={2cm,2cm},
 marginparsep=0.5cm,hoffset=0cm,voffset=0cm,footnotesep=0.5cm,
 headsep=0.5cm]{geometry}
 \fi
@@ -545,12 +476,8 @@ headsep=0.5cm]{geometry}
 %<*cls>
 \renewcommand{\baselinestretch}{1.5}
 \pagestyle{headandfoot}
-%\runningheadrule
-%\firstpageheadrule
-%\runningfootrule
-%\firstpagefootrule
 \header{}{}{}
-\footer{}{\small \kaishu{\@kemu}\quad 第~\thepage~页(共~\numpages~页)}{}
+\footer{}{\small \quad 第~\thepage~页(共~\numpages~页)}{}
 %</cls>
 %    \end{macrocode}
 %
@@ -562,16 +489,13 @@ headsep=0.5cm]{geometry}
 %</cls>
 %    \end{macrocode}
 %
-% 解的显示
+% 问题的显示
 %    \begin{macrocode}
 %<*cls>
-\renewcommand{\solutiontitle}{\noindent\heiti{解：}\noindent}
-%</cls>
-%    \end{macrocode}
-%
-% 小问的显示
-%    \begin{macrocode}
-%<*cls>
+\renewcommand{\questionshook}{
+  \settowidth{\leftmargin}{22.\hskip\labelsep}
+  \if@noindent \setlength\leftmargin{0pt} \fi
+}
 \renewcommand{\thepartno}{\arabic{partno}}
 \renewcommand{\partlabel}{(\thepartno)}
 \renewcommand{\partshook}{
@@ -581,28 +505,21 @@ headsep=0.5cm]{geometry}
 %</cls>
 %    \end{macrocode}
 %
-% 选项的显示
-%    \begin{macrocode}
-%<*cls>
-\renewcommand{\choiceshook}{
-  \settowidth{\leftmargin}{W.\hskip\labelsep}
-  \if@noindent \setlength\leftmargin{0pt} \fi
-}
-%</cls>
-%    \end{macrocode}
-%
 % 解答的显示
 %    \begin{macrocode}
 %<*cls>
+\newif\if@cancelspace \@cancelspacetrue
+\renewcommand{\solutiontitle}{\noindent 解：\noindent}
 \renewenvironment{solution}%
   {%
     \ifprintanswers
+	%\unskip
       \begingroup
       \Solution@Emphasis
       \begin{TheSolution}%
     \else
-      \ifcancelspace
-        % Do nothing
+      \if@cancelspace
+        %\unskip
       \else
         \par
         \penalty 0
@@ -631,27 +548,27 @@ headsep=0.5cm]{geometry}
 % 装订线
 %    \begin{macrocode}
 %<*cls>
-\if@marginline 
+\if@marginline
 \newsavebox{\zdxl}
 \sbox{\zdxl}{
-\begin{minipage}{0.7\paperheight} 
+\begin{minipage}{0.7\paperheight}
 \begin{center}
 \heiti 班级\underline{\hspace{15ex}} \quad
 姓名 \underline{\hspace{15ex}} \quad
-学号 \underline{\hspace{15ex}} \quad \\ 
+学号 \underline{\hspace{15ex}} \quad \\
 \vspace{3ex}
-\dotfill 装 \dotfill 订 \dotfill 线 \dotfill 
+\dotfill 装 \dotfill 订 \dotfill 线 \dotfill
 \end{center}
 \end{minipage}
 }
 \newsavebox{\zdxr}
 \sbox{\zdxr}{
-\begin{minipage}{0.7\paperheight} 
+\begin{minipage}{0.7\paperheight}
 \begin{center}
 \heiti \hfill 请 \hfill 不 \hfill 要 \hfill 在 \hfill
- 装 \hfill 订 \hfill 线 \hfill 内 \hfill 答 \hfill 题 \hfill \\ 
+ 装 \hfill 订 \hfill 线 \hfill 内 \hfill 答 \hfill 题 \hfill \\
 \vspace{3ex}
-\dotfill 装 \dotfill 订 \dotfill 线 \dotfill 
+\dotfill 装 \dotfill 订 \dotfill 线 \dotfill
 \end{center}
 \end{minipage}
 }
@@ -669,19 +586,15 @@ headsep=0.5cm]{geometry}
 % \end{macro}
 %
 % \begin{macro}{\biaoti}
-% \begin{macro}{\kemu}
+% \begin{macro}{\fubiaoti}
 % 标题
 %    \begin{macrocode}
-%<*cfg>
-\def\@biaoti{2011年全国普通高等学校招生统一考试(上海卷)}
-\def\@kemu{数学(理科)}
-%</cfg>
 %<*cls>
 \newcommand\biaoti[1]{\def\@biaoti{#1}}
-\newcommand\kemu[1]{\def\@kemu{#1}}
+\newcommand\fubiaoti[1]{\def\@fubiaoti{#1}}
 \renewcommand\maketitle{
   \begin{center}{\heiti \Large{\@biaoti}}\end{center}
-  \begin{center}{\heiti \Large{\@kemu}}\end{center}
+  \begin{center}{\heiti \Large{\@fubiaoti}}\end{center}
 }
 %</cls>
 %    \end{macrocode}
@@ -691,11 +604,7 @@ headsep=0.5cm]{geometry}
 % \begin{macro}{\mininotice}
 % \begin{macro}{\xinxi}
 % 一行内显示考试时间和考试总分
-%    \begin{macrocode}{\mininotice}
-%<*cfg>
-\def\@zongfen{150}
-\def\@shijian{120}
-%</cfg>
+%    \begin{macrocode}
 %<*cls>
 \newcommand\xinxi[2]{
   \def\@zongfen{#1}
@@ -740,7 +649,7 @@ headsep=0.5cm]{geometry}
   \hline
   得分 & 评卷人\\
   \hline
-      &       \\ 
+      &       \\
   \hline
   \end{tabular}
   \end{minipage}
@@ -765,28 +674,15 @@ headsep=0.5cm]{geometry}
 %</cls>
 %    \end{macrocode}
 % \end{macro}
+% 
 %
-% \begin{macro}{\oneb}
-% \begin{macro}{\twob}
-% \begin{macro}{\sixb}
-% \begin{macro}{\tenb}
-% 空格
-%    \begin{macrocode}
-%<*cls>
-\newcommand\oneb{\underline{\hspace{1em}}\hspace{0.001em}}
-\newcommand\twob{\oneb\oneb}
-\newcommand{\sixb}{\twob\twob}
-\newcommand\tenb{\twob\twob\twob\twob\twob}
-%</cls>
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% 填空题、选择题、简答题
+% 一些参数及变量
 %    \begin{macrocode}
 %<*cfg>
+\def\@biaoti{2011年全国普通高等学校招生统一考试(上海卷)}
+\def\@fubiaoti{数学(理科)}
+\def\@zongfen{150}
+\def\@shijian{120}
 \def\@tiankong@zongfen{56}
 \def\@tiankong@tishu{14}
 \def\@tiankong@fen{4}
@@ -799,6 +695,13 @@ headsep=0.5cm]{geometry}
 %<*cls>
 \newcounter{@dati}
 \newif\if@houpinfen \@houpinfenfalse
+%</cls>
+%    \end{macrocode}
+%
+% 填空题提示语
+% \begin{macro}{\tiankong}
+%    \begin{macrocode}
+%<*cls>
 \newcommand\settk[3]{
   \def\@tiankong@zongfen{#1}
   \def\@tiankong@tishu{#2}
@@ -806,14 +709,53 @@ headsep=0.5cm]{geometry}
 }
 \newcommand\tiankong{
   \@houpinfenfalse
-  \stepcounter{@dati} 
+  \stepcounter{@dati}
   \fullwidth{
     \if@printbox \pinfen \fi
     \begin{minipage}{\textwidth-\@boxwidth}
-    \heiti \chinese{@dati}. 填空题(\kaishu 本大题满分~\@tiankong@zongfen~分) \heiti 本大题有~\@tiankong@tishu~题, 考生应在答题纸相应编号的空格内直接写结果, 每个空格填对得~\@tiankong@fen~分, 否则一律得零分.
+    \heiti \chinese{@dati}. 填空题：本大题共~\@tiankong@tishu~题，满分~\@tiankong@zongfen~分. 请在横线上方填写最终的、最准确的、最完整的结果. 每题填写正确得~\@tiankong@fen~分，否则一律得0分.
     \end{minipage}
   }
 }
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\stk}
+% \begin{macro}{\mtk}
+% \begin{macro}{\ltk}
+% \changes{v0.3}{2014/02/18}{设置三种长度的横线，并支持在横线上输出答案}
+% 填空题横线
+%    \begin{macrocode}
+%<*cls>
+\newcommand{\stk}[1]{
+  \ifprintanswers
+    \underline{~#1~}
+  \else
+    \underline{~\hspace{1cm}~}
+  \fi}
+\newcommand{\mtk}[1]{
+  \ifprintanswers
+    \underline{~#1~}
+  \else
+    \underline{~\hspace{2cm}~}
+  \fi}
+\newcommand{\ltk}[1]{
+  \ifprintanswers
+    \underline{~#1~}
+  \else
+    \underline{~\hspace{3cm}~}
+  \fi}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% 选择题提示语
+% \begin{macro}{\xuanze}
+%    \begin{macrocode}
+%<*cls>
 \newcommand\setxz[3]{
   \def\@xuanze@zongfen{#1}
   \def\@xuanze@tishu{#2}
@@ -821,68 +763,88 @@ headsep=0.5cm]{geometry}
 }
 \newcommand\xuanze{
   \@houpinfenfalse
-  \stepcounter{@dati} 
-  \fullwidth{
-    \if@printbox \pinfen \fi
-    \begin{minipage}{\textwidth-\@boxwidth}  
-      \heiti \chinese{@dati}. 选择题(\kaishu 本大题满分~\@xuanze@zongfen~分) \heiti 本大题共有~\@xuanze@tishu~题, 每题有且只有一个正确答案, 考生应在答题纸的相应编号上, 将代表答案的小方格涂黑, 选对得~\@xuanze@fen~分, 否则一律得零分.
-    \end{minipage}
-  }
-}
-\newcommand\setjd[2]{
-  \def\@jianda@zongfen{#1}
-  \def\@jianda@tishu{#2}
-}
-\newcommand\jianda{
-  \@houpinfentrue
-  \qformat{\hskip\labelsep \kaishu \thequestion.~~(本题满分~\totalpoints~分)\hfill}
   \stepcounter{@dati}
   \fullwidth{
-    \if@printbox \pinfen \fi  
+    \if@printbox \pinfen \fi
     \begin{minipage}{\textwidth-\@boxwidth}
-      \heiti \chinese{@dati}. 简答题(\kaishu 本大题满分~\@jianda@zongfen~分)~\heiti 本大题共有~\@jianda@tishu~题, 解答下列各题必须在答题纸相应的编号规定区域内写出必要的步骤.
+      \heiti \chinese{@dati}. 选择题：本大题共~\@xuanze@tishu~题，满分~\@xuanze@zongfen~分. 请选择你认为最正确的答案（每小题有且只有一个）写在括号内. 每题填写正确得~\@xuanze@fen~分，否则得0分.
     \end{minipage}
   }
 }
 %</cls>
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\onech}
+% \begin{macro}{\twoch}
+% \begin{macro}{\fourch}
+% \changes{v0.3}{2014/02/18}{分一行、两行、四行显示选项}
+% 选择题的选项
+%    \begin{macrocode}
+%<*cls>
+\newcommand{\onech}[4]{
+\renewcommand\arraystretch{1.4}
+\begin{tabularx}{\linewidth}{XXXX}
+\setlength\tabcolsep{0pt}
+(A) #1 & (B) #2 & (C) #3 & (D) #4 \\
+\end{tabularx}
+\unskip \unskip}
+\newcommand{\twoch}[4]{
+\renewcommand\arraystretch{1.4}
+\begin{tabularx}{\linewidth}{XX}
+\setlength\tabcolsep{0pt}
+(A) #1 & (B) #2 \\
+(C) #3 & (D) #4
+\end{tabularx}
+\unskip \unskip}
+\newcommand{\fourch}[4]{
+\renewcommand\arraystretch{1.4}
+\begin{tabularx}{\linewidth}{X}
+\setlength\tabcolsep{0pt}
+(A) #1 \\
+(B) #2 \\
+(C) #3 \\
+(D) #4 \\
+\end{tabularx}
+\unskip \unskip}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% 简答题提示语
+% \begin{macro}{\jianda}
+%    \begin{macrocode}
+%<*cls>
+\newcommand\setjd[2]{
+  \def\@jianda@zongfen{#1}
+  \def\@jianda@tishu{#2}
+}
+\newcommand\jianda{
+  \@cancelspacefalse
+  \@houpinfentrue
+  \stepcounter{@dati}
+  \fullwidth{
+    \if@printbox \pinfen \fi
+    \begin{minipage}{\textwidth-\@boxwidth}
+      \heiti \chinese{@dati}. 简答题：本大题共~\@jianda@tishu~题，满分~\@jianda@zongfen~分. 请在题后空处写出必要的推理计算过程.
+    \end{minipage}
+  }
+}
+%</cls>
+%    \end{macrocode}
+% \end{macro}
 %
 % 数学运算符号、单位
 %    \begin{macrocode}
 %<*cls>
-\newcommand{\rc}{\text{C}}
-\newcommand{\ri}{\text{i}}
-\newcommand{\ra}{\text{A}}
-\newcommand{\rd}{\text{d}}
-\newcommand\tian{\ensuremath{\text{d}}}
-\newcommand\A{\ensuremath{\text{A}}}
-\def\m{\ensuremath{\text{m}}}
-\newcommand\g{\ensuremath{\text{g}}}
-\newcommand\kg{\ensuremath{\text{kg}}}
-\newcommand\degree{\ensuremath{^\circ}}
-\newcommand\ssd{\ensuremath{\text{\textcelsius}}}
-\newcommand\rad{\ensuremath{\text{rad}}}
-\newcommand\N{\ensuremath{\text{N}}}
-\newcommand\Pa{\ensuremath{\text{Pa}}}
-\newcommand\J{\ensuremath{\text{J}}}
-\newcommand\W{\ensuremath{\text{W}}}
-\newcommand\ohm{\ensuremath{\Omega}}
-\newcommand\mol{\ensuremath{\text{mol}}}
-\newcommand\K{\ensuremath{\text{K}}}
-\newcommand\h{\ensuremath{\text{h}}}
-\newcommand\ton{\ensuremath{\text{t}}}
-\newcommand\squarem{\ensuremath{\text{m$^2$}}}
-\newcommand\cubicm{\ensuremath{\text{m$^3$}}}
-\newcommand\cm{\ensuremath{\text{cm}}}
-\newcommand\mm{\ensuremath{\text{mm}}}
-\newcommand\squarecm{\ensuremath{\text{cm$^2$}}}
-\newcommand\cubiccm{\ensuremath{\text{cm$^3$}}}
-\newcommand\squaremm{\ensuremath{\text{mm$^2$}}}
-\newcommand\cubicmm{\ensuremath{\text{mm$^3$}}}
-\newcommand\liter{\ensuremath{\text{L}}}
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand\arccot{\mathop{\text{arccot}}}
-\newcommand\pingxing{\parallel}
+\delimitershortfall-1sp
+\newcommand\abs[1]{\left|#1\right|}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\le}{\leqslant}
 %<\cls>
 %    \end{macrocode}
 %

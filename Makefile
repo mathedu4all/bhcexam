@@ -39,11 +39,11 @@ install:	cls
 		cp $(PACKAGE).{cls,cfg} $(TEXMFDIR)
 uninstall:	; rm $(TEXMFDIR)/$(PACKAGE).{cls,cfg}
 clean:		; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
-		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
+		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out *~
 veryclean:	; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
 		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
 		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
-		-rm -f *.sty *.cls *.pdf *pk *.cfg *.tar
+		-rm -f *.sty *.cls *.pdf *pk *.cfg *.tar *~
 
 
 doc:		; $(XELATEX) $(PACKAGE).dtx
