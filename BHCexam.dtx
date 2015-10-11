@@ -44,7 +44,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{BHCexam}
 %<cfg>\ProvidesFile{BHCexam.cfg}
-  [2014/02/18 v0.3 BHCexam
+  [2015/10/10 v0.4 BHCexam
 %<cls>   document class]
 %<cfg>   configuration file]
 %
@@ -81,6 +81,7 @@
 % \changes{v0.1}{2011/07/23}{version 0.1}
 % \changes{v0.2}{2011/07/27}{version 0.2}
 % \changes{v0.3}{2014/02/18}{version 0.3}
+% \changes{v0.3}{2015/10/10}{version 0.4}
 %
 %
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup}
@@ -241,7 +242,8 @@
 % \label{sec:Options}
 %
 % \changes{v0.2}{2011/07/27}{增加UTF8选项以支持pdflatex}
-%
+% \changes{v0.4}{2015/10/10}{取消UTF8选项放弃支持pdflatex}
+
 % 宏包的选项用于改变一些缺省的设置。虽然缺省的设置基本能过满足一般用户的
 % 使用需要，但用户也可以根据自己的情况，使用这些选项。
 %
@@ -253,7 +255,6 @@
 % \item[16kpaper]    使用16开纸张（缺省使用A4纸张）。
 % \item[noindent]    没有缩进。
 % \item[printbox]    显示评分框。
-% \item[UTF8]        用pdflatex编译时需要。
 % \end{description}
 %
 % \subsection{变量}
@@ -345,17 +346,6 @@
 %
 % \subsection{选项}
 %
-%\begin{macro}{\input}
-% \changes{v0.2}{2011/07/27}{改用input语句导入ctex类文件}
-% 导入ctex类的选项
-%    \begin{macrocode}
-%<*cls>
-\input{ctex-common-opts.def}
-\input{ctex-class-opts.def}
-\input{ctex-caption-opts.def}
-%</cls>
-%    \end{macrocode}
-%\end{macro}
 %
 % 处理~\BHCexam~文档类的选项
 %
@@ -418,11 +408,10 @@
 %    \end{macrocode}
 % 
 % 导入ctex类的实现
+% \changes{v0.4}{2015/10/10}{修正ctex宏包实现}
 %    \begin{macrocode}
 %<*cls>
-\input{ctex-common.def}
-\input{ctex-caption.def}
-\input{ctex-class.def}
+\RequirePackage{ctex}
 %</cls>
 %    \end{macrocode}
 % \subsection{宏包}

@@ -83,6 +83,6 @@ test:		cls
 		$(XELATEX) test2.tex 
 		$(XELATEX) test3.tex 
 		$(XELATEX) test3.tex 
-		$(PDFLATEX) test4.tex 
-		$(PDFLATEX) test4.tex 
+		$(XELATEX) test4.tex 
+		$(XELATEX) test4.tex 
 
