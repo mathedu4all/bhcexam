@@ -27,8 +27,8 @@
 % The newest version of this documentclass should always be available
 % from my web page: https://github.com/mathedu4all/bhcexam
 
-\def\fileversion{1.0}
-\def\filedate{2016/09/01}
+\def\fileversion{1.01}
+\def\filedate{2017/11/01}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
@@ -65,6 +65,7 @@
 \newcommand\@fontsize{false}
 \DeclareOption{csize5}{\renewcommand\@fontsize{5}}
 \DeclareOption{csize4}{\renewcommand\@fontsize{-4}}
+
 
 \newcommand\@fontset{none}
 \DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
@@ -105,7 +106,7 @@
 %                         ** PAGE LAYOUT **
 %                         *****************
 
-\RequirePackage{geometry}
+\RequirePackage{geometry,fancyhdr,lastpage}
 
 \if@twocolumn
 \geometry{landscape,twocolumn}
@@ -120,6 +121,9 @@
 \geometry{hmargin={4cm,2cm},vmargin={2cm,2cm}}
 \setlength{\marginparwidth}{2cm}
 \reversemarginpar
+\else
+\geometry{hmargin={2cm,2cm},vmargin={2cm,2cm}}
+\setlength{\marginparwidth}{2cm}
 \fi
 
 \newsavebox{\mlbox}
@@ -142,22 +146,33 @@
 
 \renewcommand*{\title}[1]{\gdef\@title{#1}}
 \newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
+\newcommand*{\notice}[1]{\gdef\@notice{#1}}
+\renewcommand*{\author}[1]{\gdef\@author{#1}}
 \renewcommand*{\date}[1]{\gdef\@date{#1}}
 \renewcommand\maketitle{\begingroup
+	\renewcommand{\baselinestretch}{2}
 	\newpage
 	\if@printmargin \printml \fi
 	\global\@topnum\z@ 	% Prevents figures from going at top of page.
 	\begin{center}
-		\heiti {\large \@title \par}
-		\heiti {\large \@subtitle \par}
+		\heiti \Large
+		\@title \par
+		\@subtitle \par
+		\fbox{\normalsize \@notice} \par
+		\songti \normalsize \@author \par
 	\end{center}
 	\begin{flushright}
-		\songti {\small \@date \par}
+		\small \@date \par
 	\end{flushright}
+	\songti \normalsize
 \endgroup}
 
-\renewcommand\arraystretch{1.4}
-\renewcommand{\baselinestretch}{2}
+\renewcommand\arraystretch{1.2}
+\renewcommand{\baselinestretch}{1.2}
+
+
+
+
 
 
 
@@ -182,14 +197,14 @@
 }
 
 \newcommand{\group}[2]{
-	\stepcounter{Group} \heiti{\par \chinese{Group} 、#1} \small{\kaishu \par #2}
+	\stepcounter{Group} \heiti{\par \chinese{Group} 、#1} \small{\kaishu \par #2} \songti \normalsize
 }
 
 \newenvironment{questions}[1][]{
 	\@tfor \@opt :=#1\do
 		{\if\@opt s\global\@showscoretrue\fi
 		 \if\@opt t\global\@showskiptrue\fi}
-	\par \songti \begingroup \par
+	\par \begingroup \par
 }{
 	\par \endgroup \par
 	\global\@showscorefalse
@@ -197,23 +212,20 @@
 }
 
 \newcommand{\question}[1][0]{
-	\stepcounter{Question} \vspace{5mm} \par \arabic{Question}.  \if@showscore \kaishu{( #1 分)} \fi
+	\stepcounter{Question} \vspace{5mm} \par \arabic{Question}.  \if@showscore \kaishu ( #1 分) \songti \fi
 }
 
-\newenvironment{subquestions}[1][]{
-	\@tfor \@opt:=#1\do
-		{\if\@opt s\global\@showscoretrue\fi}
+\newenvironment{subquestions}{
 	\par \songti \begingroup \par
 }{
 	\par \endgroup \par
-	\global\@showscorefalse
 }
 
 \newcommand{\subquestion}[1][0]{
-	\stepcounter{Subquestion} \par (\arabic{Subquestion})  \if@showscore \kaishu{( #1 分)} \fi}
+	\stepcounter{Subquestion} \par (\arabic{Subquestion})  \if@showscore \kaishu ( #1 分) \songti \fi}
 
 \newenvironment{solution}{
-	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
+	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \newpage \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
 	\par \if@printanswers \unskip \endgroup \color{black} \else \egroup \fi \par
 }
