@@ -27,8 +27,8 @@
 % The newest version of this documentclass should always be available
 % from my web page: https://github.com/mathedu4all/bhcexam
 
-\def\fileversion{1.01}
-\def\filedate{2017/11/01}
+\def\fileversion{1.02}
+\def\filedate{2017/11/18}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
@@ -167,8 +167,8 @@
 	\songti \normalsize
 \endgroup}
 
-\renewcommand\arraystretch{1.2}
-\renewcommand{\baselinestretch}{1.2}
+\renewcommand\arraystretch{1.5}
+\renewcommand{\baselinestretch}{1.5}
 
 
 
