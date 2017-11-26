@@ -225,7 +225,7 @@
 	\stepcounter{Subquestion} \par (\arabic{Subquestion})  \if@showscore \kaishu ( #1 分) \songti \fi}
 
 \newenvironment{solution}{
-	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \newpage \fi \setbox\z@\vbox\bgroup\fi \songti
+	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
 	\par \if@printanswers \unskip \endgroup \color{black} \else \egroup \fi \par
 }
