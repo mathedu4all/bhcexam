@@ -106,7 +106,7 @@
 %                         ** PAGE LAYOUT **
 %                         *****************
 
-\RequirePackage{geometry,fancyhdr,lastpage}
+\RequirePackage{geometry,fancyhdr}
 
 \if@twocolumn
 \geometry{landscape,twocolumn}
@@ -149,11 +149,16 @@
 \newcommand*{\notice}[1]{\gdef\@notice{#1}}
 \renewcommand*{\author}[1]{\gdef\@author{#1}}
 \renewcommand*{\date}[1]{\gdef\@date{#1}}
+\newcommand*{\logo}[1]{\gdef\@logo{#1}}
 \renewcommand\maketitle{\begingroup
 	\renewcommand{\baselinestretch}{2}
 	\newpage
 	\if@printmargin \printml \fi
 	\global\@topnum\z@ 	% Prevents figures from going at top of page.
+	\begin{minipage}{0.1\textwidth}
+		\includegraphics[width=1.5cm]{\@logo}
+	\end{minipage}
+	\begin{minipage}{0.9\textwidth}
 	\begin{center}
 		\heiti \Large
 		\@title \par
@@ -161,6 +166,7 @@
 		\fbox{\normalsize \@notice} \par
 		\songti \normalsize \@author \par
 	\end{center}
+	\end{minipage}
 	\begin{flushright}
 		\small \@date \par
 	\end{flushright}
@@ -222,12 +228,12 @@
 }
 
 \newcommand{\subquestion}[1][0]{
-	\stepcounter{Subquestion} \par (\arabic{Subquestion})  \if@showscore \kaishu ( #1 分) \songti \fi}
+	\stepcounter{Subquestion} \par (\arabic{Subquestion})  
 
 \newenvironment{solution}{
 	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
-	\par \if@printanswers \unskip \endgroup \color{black} \else \egroup \fi \par
+	\par \color{black} \else \egroup \fi \par
 }
 	
 \newcommand{\method}{
