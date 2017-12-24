@@ -228,7 +228,8 @@
 }
 
 \newcommand{\subquestion}[1][0]{
-	\stepcounter{Subquestion} \par (\arabic{Subquestion})  
+	\stepcounter{Subquestion} \par (\arabic{Subquestion}) 
+} 
 
 \newenvironment{solution}{
 	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
