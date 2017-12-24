@@ -234,7 +234,7 @@
 \newenvironment{solution}{
 	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
-	\par \color{black} \else \egroup \fi \par
+	\par \if@printanswers \endgroup \color{black} \else \egroup \fi \par
 }
 	
 \newcommand{\method}{
