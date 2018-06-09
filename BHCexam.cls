@@ -93,7 +93,7 @@
 %                    **  EXTRA REQUIRED PACKAGE **
 %                    *****************************
 
-\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts,tipa}
+\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts}
 \RequirePackage{paralist,cases,tabularx}
 \RequirePackage{pstricks,pst-plot,xcolor,graphicx}
 \RequirePackage{geometry,caption}
@@ -304,7 +304,7 @@
 \newcommand\abs[1]{\left|#1\right|}
 \newcommand{\gt}{>}
 \newcommand{\lt}{<}
-\newcommand\overparen[1]{\texttoptiebar{#1}}
+\newcommand\overparen[1]{\overarc{#1}}
 \renewcommand{\geq}{\geqslant}
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\leq}{\leqslant}
