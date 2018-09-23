@@ -93,7 +93,7 @@
 %                    **  EXTRA REQUIRED PACKAGE **
 %                    *****************************
 
-\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts,yhmath}
+\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts,yhmath,pifont,romannum}
 \RequirePackage{paralist,cases,tabularx}
 \RequirePackage{pstricks,pst-plot,xcolor,graphicx}
 \RequirePackage{geometry,caption}
