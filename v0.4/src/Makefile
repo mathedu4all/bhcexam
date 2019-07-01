@@ -7,7 +7,6 @@ PACKAGE = BHCexam
 TEXMFDIR   = ~/texmf/tex/latex/BHCexam
 GZIP      = gzip
 XELATEX  = xelatex
-PDFLATEX  = pdflatex
 MAKEINDEX = makeindex
 ########################################################################
 ## make [all]		Generates the class(.cls) file, the configuration(.cfg)
@@ -38,8 +37,8 @@ all:		veryclean cls fulldoc test clean
 install:	cls
 		cp $(PACKAGE).{cls,cfg} $(TEXMFDIR)
 uninstall:	; rm $(TEXMFDIR)/$(PACKAGE).{cls,cfg}
-clean:		; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
-		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out *~
+clean:		; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc *.synctex.gz
+		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out *.swap *~
 veryclean:	; -rm -f *.dvi *.log *.aux *.lof *.lot *.toc 
 		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
 		-rm -f *.idx *.ind *.glo *.gls *.ilg *.out
