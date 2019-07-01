@@ -67,7 +67,7 @@
 \DeclareOption{csize4}{\renewcommand\@fontsize{-4}}
 
 
-\newcommand\@fontset{none}
+\newcommand\@fontset{adobe}
 \DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
 \DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
@@ -89,17 +89,18 @@
 \RequirePackage[fontset = \@fontset, zihao = \@fontsize]{ctex}
 \ctexset{linestretch = 4, autoindent = 0pt}
 
+
 %                    *****************************
 %                    **  EXTRA REQUIRED PACKAGE **
 %                    *****************************
 
-\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts,yhmath,pifont,romannum}
-\RequirePackage{paralist,cases,tabularx}
+\RequirePackage{amsmath,amssymb,amsthm,bm,bbding,mathtools,txfonts,yhmath,pifont,ifthen}
+\RequirePackage{paralist,cases,tabularx,romannum}
 \RequirePackage{pstricks,pst-plot,xcolor,graphicx}
 \RequirePackage{geometry,caption}
-\captionsetup[figure]{font=small,skip=2pt}
+\captionsetup[figure]{font=small,belowskip=-25pt}
 
-
+\AtBeginDocument{\pagenumbering{arabic}}
 
 
 %                         *****************
@@ -107,7 +108,6 @@
 %                         *****************
 
 \RequirePackage{geometry,fancyhdr}
-
 \if@twocolumn
 \geometry{landscape,twocolumn}
 \setlength{\columnsep}{2cm}
@@ -189,12 +189,15 @@
 
 \newcounter{Group}
 \newcounter{Question}
+\newcounter{Example}
+\newcounter{Exercise}
 \newcounter{Subquestion}[Question]
 \newcounter{Method}[Question]
 \newif\if@showscore
 \@showscorefalse
 \newif\if@showskip
 \@showskipfalse
+\newlength{\myvertspace}
 
 \newenvironment{groups}{
 	\par \begingroup
@@ -203,7 +206,7 @@
 }
 
 \newcommand{\group}[2]{
-	\stepcounter{Group} \heiti{\par \chinese{Group} 、#1} \small{\kaishu \par #2} \songti \normalsize
+	\stepcounter{Group} \heiti{\par \chinese{Group} 、#1} \quad \small{\kaishu #2} \songti \normalsize
 }
 
 \newenvironment{questions}[1][]{
@@ -221,6 +224,15 @@
 	\stepcounter{Question} \vspace{5mm} \par \arabic{Question}.  \if@showscore \kaishu ( #1 分) \songti \fi
 }
 
+\newcommand{\example}[1][0]{
+	\stepcounter{Example} \vspace{5mm} \par 例题\arabic{Example}.  \if@showscore \kaishu ( #1 分) \songti \fi
+}
+
+\newcommand{\exercise}[1][0]{
+	\stepcounter{Exercise} \vspace{5mm} \par 习题\arabic{Exercise}.  \if@showscore \kaishu ( #1 分) \songti \fi
+}
+
+
 \newenvironment{subquestions}{
 	\par \songti \begingroup \par
 }{
@@ -231,43 +243,37 @@
 	\stepcounter{Subquestion} \par (\arabic{Subquestion}) 
 } 
 
-\newenvironment{solution}{
-	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace{8cm} \fi \setbox\z@\vbox\bgroup\fi \songti
+\newenvironment{solution}[1]{
+	\setlength{\myvertspace}{#1}
+	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace*{\myvertspace} \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
 	\par \if@printanswers \endgroup \color{black} \else \egroup \fi \par
 }
-	
+
+\newcommand{\hint}{
+	\par \fbox{\heiti{提示}} \par \songti
+}
 \newcommand{\method}{
 	\stepcounter{Method}
-		\par \fbox{\heiti{解法\chinese{Method}}} \par \songti
-	}
+	\par \fbox{\heiti{解法\chinese{Method}}} \par \songti
+}
 	
 \newcommand{\methodonly}{
-	\par \fbox{\heiti{解答}} \par \songti}
+	\par \fbox{\heiti{解答}} \par \songti
+}
 
 \newcommand{\score}[2]{
 	\par
 	\dotfill 本步骤 #1 分， 累计 #2 分
 	\par}
 
-
-\newcommand{\stk}[1]{
+\newlength{\keylength}
+\newcommand{\key}[1]{
 	\if@printanswers
-	\underline{~#1~}
+	\underline{~~#1~~}
 	\else
-	\underline{~\hspace{1cm}~}
-	\fi}
-\newcommand{\mtk}[1]{
-	\if@printanswers
-	\underline{~#1~}
-	\else
-	\underline{~\hspace{2cm}~}
-	\fi}
-\newcommand{\ltk}[1]{
-	\if@printanswers
-	\underline{~#1~}
-	\else
-	\underline{~\hspace{3cm}~}
+	\settowidth{\keylength}{~~#1~~}
+	\underline{~\hspace{2\keylength}~}
 	\fi}
 
 \newcommand{\onech}[4]{
@@ -296,6 +302,106 @@
 	\end{tabularx}
 	\unskip \unskip}
 
+\newlength{\choicelengtha}
+\newlength{\choicelengthb}
+\newlength{\choicelengthc}
+\newlength{\choicelengthd}
+\newlength{\choicelengthe}
+\newlength{\maxlength}
+
+\newcommand{\fourchoices}[4]
+{
+	\par
+	\settowidth{\choicelengtha}{A.~#1~~~}
+	\settowidth{\choicelengthb}{B.~#2~~~}
+	\settowidth{\choicelengthc}{C.~#3~~~}
+	\settowidth{\choicelengthd}{D.~#4~~~}
+	\ifthenelse{\lengthtest{\choicelengtha>\choicelengthb}}{\setlength{\maxlength}{\choicelengtha}}{\setlength{\maxlength}{\choicelengthb}}
+	\ifthenelse{\lengthtest{\choicelengthc>\maxlength}}{\setlength{\maxlength}{\choicelengthc}}{}
+	\ifthenelse{\lengthtest{\choicelengthd>\maxlength}}{\setlength{\maxlength}{\choicelengthd}}{}
+
+	\ifthenelse{\lengthtest{\maxlength>0.5\linewidth}}
+	{
+		\begin{tabularx}{\linewidth}{X}
+			\setlength\tabcolsep{0pt}
+			A.~#1~~~\\
+			B.~#2~~~\\
+			C.~#3~~~\\
+			D.~#4~~~\\
+		\end{tabularx}
+	}
+	{
+		\ifthenelse{\lengthtest{\maxlength>0.25\linewidth}}
+		{
+			\begin{tabularx}{\linewidth}{XX}
+				\setlength\tabcolsep{0pt}
+				A.~#1~~~ & B.~#2~~~\\
+				C.~#3~~~ & D.~#4~~~\\
+			\end{tabularx}
+		}
+		{
+			\begin{tabularx}{\linewidth}{XXXX}
+				\setlength\tabcolsep{0pt}
+				A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~\\ \\
+			\end{tabularx}
+		}
+	}
+	\unskip \unskip
+}
+
+\newcommand{\fivechoices}[5]
+{
+	\par
+	\settowidth{\choicelengtha}{A.~#1~~~}
+	\settowidth{\choicelengthb}{B.~#2~~~}
+	\settowidth{\choicelengthc}{C.~#3~~~}
+	\settowidth{\choicelengthd}{D.~#4~~~}	\settowidth{\choicelengthe}{D.~#5~~~}
+	\ifthenelse{\lengthtest{\choicelengtha>\choicelengthb}}{\setlength{\maxlength}{\choicelengtha}}{\setlength{\maxlength}{\choicelengthb}}
+	\ifthenelse{\lengthtest{\choicelengthc>\maxlength}}{\setlength{\maxlength}{\choicelengthc}}{}
+	\ifthenelse{\lengthtest{\choicelengthd>\maxlength}}{\setlength{\maxlength}{\choicelengthd}}{}	\ifthenelse{\lengthtest{\choicelengthe>\maxlength}}{\setlength{\maxlength}{\choicelengthe}}{}
+	
+	\ifthenelse{\lengthtest{\maxlength>0.5\linewidth}}
+	{
+		\begin{tabularx}{\linewidth}{X}
+			\setlength\tabcolsep{0pt}
+			A.~#1~~~\\
+			B.~#2~~~\\
+			C.~#3~~~\\
+			D.~#4~~~\\
+			E.~#5~~~\\
+		\end{tabularx}
+	}
+	{
+		\ifthenelse{\lengthtest{\maxlength>0.33\linewidth}}
+		{
+			\begin{tabularx}{\linewidth}{XX}
+				\setlength\tabcolsep{0pt}
+				A.~#1~~~ & B.~#2~~~\\
+				C.~#3~~~ & D.~#4~~~\\
+				E.~#5~~~ &         \\
+			\end{tabularx}
+		}
+		{
+			\ifthenelse{\lengthtest{\maxlength>0.2\linewidth}}
+			{
+				\begin{tabularx}{\linewidth}{XXX}
+					\setlength\tabcolsep{0pt}
+					A.~#1~~~  & B.~#2~~~ & C.~#3~~~\\
+					D.~#4~~~  & E.~#2~~~ &         \\
+				\end{tabularx}
+			}
+			{
+				\begin{tabularx}{\linewidth}{XXXXX}
+					\setlength\tabcolsep{0pt}
+					A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~  & E.~#2~~~\\
+				\end{tabularx}
+			}
+
+		}
+	}
+	\unskip \unskip
+}
+
 
 %                    ***************************
 %                    **   CUSTOMIZED COMMAND  **
@@ -309,6 +415,6 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\le}{\leqslant}
-
+\renewenvironment{split}{\begin{aligned}}{\end{aligned}}
 
 \endinput
