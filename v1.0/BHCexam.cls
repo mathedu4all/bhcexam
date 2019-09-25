@@ -3,7 +3,7 @@
 % A LaTeX2e document class for preparing exams.
 
 %% BHCexam.cls
-%% Copyright (c) 2011-2017 BAO HONG CHANG
+%% Copyright (c) 2011-2019 BAO HONG CHANG
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -58,10 +58,6 @@
 \@printanswersfalse
 \DeclareOption{answers}{\@printanswerstrue}
 
-\newif\if@printmargin
-\@printmarginfalse
-\DeclareOption{printmargin}{\@printmargintrue}
-
 \newcommand\@fontsize{false}
 \DeclareOption{csize5}{\renewcommand\@fontsize{5}}
 \DeclareOption{csize4}{\renewcommand\@fontsize{-4}}
@@ -69,7 +65,6 @@
 
 \newcommand\@fontset{adobe}
 \DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
-\DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
 \DeclareOption{windows}{\renewcommand\@fontset{windowsnew}}
 
@@ -108,6 +103,7 @@
 %                         *****************
 
 \RequirePackage{geometry,fancyhdr}
+
 \if@twocolumn
 \geometry{landscape,twocolumn}
 \setlength{\columnsep}{2cm}
@@ -117,32 +113,9 @@
 \geometry{twoside}
 \fi
 
-\if@printmargin
-\geometry{hmargin={4cm,2cm},vmargin={2cm,2cm}}
-\setlength{\marginparwidth}{2cm}
-\reversemarginpar
-\else
 \geometry{hmargin={2cm,2cm},vmargin={2cm,2cm}}
 \setlength{\marginparwidth}{2cm}
-\fi
 
-\newsavebox{\mlbox}
-\sbox{\mlbox}{
-	\begin{minipage}{0.7\paperheight}
-		\begin{center}
-			\heiti
-			班级 \underline{\hspace{15ex}} \quad
-			姓名 \underline{\hspace{15ex}} \quad
-			学号 \underline{\hspace{15ex}} \quad \\
-			\vspace{3ex}
-			\dotfill 装 \dotfill 订 \dotfill 线 \dotfill
-		\end{center}
-	\end{minipage}
-}
-
-\newcommand{\printml}{
-	\marginpar{\rotatebox{90}{\usebox{\mlbox}}}
-}
 
 \renewcommand*{\title}[1]{\gdef\@title{#1}}
 \newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
@@ -153,8 +126,6 @@
 \renewcommand\maketitle{\begingroup
 	\renewcommand{\baselinestretch}{2}
 	\newpage
-	\if@printmargin \printml \fi
-	\global\@topnum\z@ 	% Prevents figures from going at top of page.
 	\begin{minipage}{0.1\textwidth}
 		\includegraphics[width=1.5cm]{\@logo}
 	\end{minipage}
@@ -175,13 +146,6 @@
 
 \renewcommand\arraystretch{1.5}
 \renewcommand{\baselinestretch}{1.5}
-
-
-
-
-
-
-
 
 %                    ***************************
 %                    ** QUESTION ENVIRONMENTS **
@@ -319,7 +283,6 @@
 	\ifthenelse{\lengthtest{\choicelengtha>\choicelengthb}}{\setlength{\maxlength}{\choicelengtha}}{\setlength{\maxlength}{\choicelengthb}}
 	\ifthenelse{\lengthtest{\choicelengthc>\maxlength}}{\setlength{\maxlength}{\choicelengthc}}{}
 	\ifthenelse{\lengthtest{\choicelengthd>\maxlength}}{\setlength{\maxlength}{\choicelengthd}}{}
-
 	\ifthenelse{\lengthtest{\maxlength>0.5\linewidth}}
 	{
 		\begin{tabularx}{\linewidth}{X}
@@ -342,7 +305,7 @@
 		{
 			\begin{tabularx}{\linewidth}{XXXX}
 				\setlength\tabcolsep{0pt}
-				A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~\\ \\
+				A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~\\ 
 			\end{tabularx}
 		}
 	}
