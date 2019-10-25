@@ -42,15 +42,9 @@
  % Following options are available:
  
  % answers
- % printmargin
- % csize5
- % csize4
  % adobe
- % fandol
  % ubuntu
  % windows
- % twocolumn
- % twoside
 
 
 
@@ -68,13 +62,6 @@
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
 \DeclareOption{windows}{\renewcommand\@fontset{windowsnew}}
 
-\newif\if@twocolumn
-\@twocolumnfalse
-\DeclareOption{twocolumn}{\@twocolumntrue}
-
-\newif\if@twoside
-\@twosidefalse
-\DeclareOption{twoside}{\@twosidetrue}
 
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
@@ -104,19 +91,10 @@
 
 \RequirePackage{geometry,fancyhdr}
 
-\if@twocolumn
-\geometry{landscape,twocolumn}
-\setlength{\columnsep}{2cm}
-\fi
-
-\if@twoside
-\geometry{twoside}
-\fi
 
 \geometry{hmargin={2cm,2cm},vmargin={2cm,2cm}}
 \setlength{\marginparwidth}{2cm}
-
-
+\renewcommand{\headrulewidth}{0pt}
 \renewcommand*{\title}[1]{\gdef\@title{#1}}
 \newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand*{\notice}[1]{\gdef\@notice{#1}}
@@ -231,13 +209,24 @@
 	\dotfill 本步骤 #1 分， 累计 #2 分
 	\par}
 
+\makeatletter
+\newcommand{\build}[2]{\leavevmode
+	\count@=\z@ \toks@={}%
+	\loop\ifnum\count@<\numexpr#1\relax
+	\toks@=\expandafter{\the\toks@#2}%
+	\advance\count@\@ne
+	\repeat
+	\the\toks@}
+\makeatletter
+
 \newlength{\keylength}
 \newcommand{\key}[1]{
 	\if@printanswers
 	\underline{~~#1~~}
 	\else
 	\settowidth{\keylength}{~~#1~~}
-	\underline{~\hspace{2\keylength}~}
+	\build{13}{\hskip1sp\kern-1sp\hbox to 0.1\keylength{\hrulefill}}
+%	\underline{~\hspace{1.3\keylength}~}
 	\fi}
 
 \newcommand{\onech}[4]{
