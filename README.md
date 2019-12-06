@@ -18,7 +18,7 @@ charles@mathcrowd.cn
 #### Related
 
 Mathcrowd Website: https://www.mathcrowd.cn
-Github Project Site: https://github.com/mathedu4all/mathcrowd_community
+Github Project Site: https://github.com/mathedu4all/mathcrowd-community
 
 ------
 
