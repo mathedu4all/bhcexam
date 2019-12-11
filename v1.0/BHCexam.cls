@@ -90,7 +90,7 @@
 %                         *****************
 
 \RequirePackage{geometry,fancyhdr}
-
+\RequirePackage{etoolbox}
 
 \geometry{hmargin={2cm,2cm},vmargin={2cm,2cm}}
 \setlength{\marginparwidth}{2cm}
@@ -104,15 +104,19 @@
 \renewcommand\maketitle{\begingroup
 	\renewcommand{\baselinestretch}{2}
 	\newpage
-	\begin{minipage}{0.1\textwidth}
-		\includegraphics[width=1.5cm]{\@logo}
-	\end{minipage}
+	\IfFileExists{\@logo}{
+		\begin{minipage}{0.1\textwidth}
+			\includegraphics[width=1.5cm]{\@logo}
+		\end{minipage}
+	}{}
 	\begin{minipage}{0.9\textwidth}
 	\begin{center}
 		\heiti \Large
 		\@title \par
 		\@subtitle \par
-		\fbox{\normalsize \@notice} \par
+		\ifdefempty{\@notice}{}{
+			\fbox{\normalsize \@notice} \par
+		}
 		\songti \normalsize \@author \par
 	\end{center}
 	\end{minipage}
@@ -148,7 +152,7 @@
 }
 
 \newcommand{\group}[2]{
-	\stepcounter{Group} \heiti{\par \chinese{Group} 、#1} \quad \small{\kaishu #2} \songti \normalsize
+	\stepcounter{Group} \vspace{5mm} \par \heiti{\par \chinese{Group} 、#1} \quad \small{\kaishu #2} \songti \normalsize
 }
 
 \newenvironment{questions}[1][]{
@@ -298,7 +302,7 @@
 			\end{tabularx}
 		}
 	}
-	\unskip \unskip
+	\unskip \unskip 
 }
 
 \newcommand{\fivechoices}[5]
@@ -351,7 +355,7 @@
 
 		}
 	}
-	\unskip \unskip
+	\unskip \unskip 
 }
 
 
