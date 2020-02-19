@@ -3,13 +3,13 @@ The BHCexam document class attempts to make it easy for even a LaTeX novice to p
 
 #### Notice
 
-The BHCexam document class is no longer designed for typesetting math papers by .tex manully after version 0.5. Instead the author started a community  called Mathcrowd for math teachers to share their math exams in a public database. Members can prepare their math exams on the web.
+The BHCexam document class is no longer designed for typesetting math papers by .tex manually after version 0.5. Instead, the author started a community called Mathcrowd for math teachers to share their math exams in a public database. Members can prepare their math exams on the web.
 
 #### Release
 
 * v0.5 is a stable version with documentation. [download](https://github.com/mathedu4all/bhcexam/releases/download/v0.5/bhcexam.zip).
 
-* v1.0 is completely rewrited with article class with documentation [here](http://docs.mathcrowd.cn/zh_CN/latest/advances/bhcexam.html). [download](https://github.com/mathedu4all/bhcexam/releases/download/v1.0/bhcexam.zip).
+* v1.1 is completely rewrited with article class with documentation [here](http://docs.mathcrowd.cn/zh_CN/latest/advances/bhcexam.html). [download](https://github.com/mathedu4all/bhcexam/releases/download/v1.0/bhcexam.zip).
 
 #### Author
 
