@@ -1,0 +1,1 @@
+../BHCexam.cls
