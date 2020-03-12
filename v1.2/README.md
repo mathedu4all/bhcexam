@@ -6,7 +6,7 @@ This is version 1.2 of the BHCexam document class, dated March 09, 2020.
 
 This version is especially designed for the automatic math exams typesetting applications ( www.mathcrowd.cn ) developed by Charles Bao ( charles@mathcrowd.cn ).
 
-Documentation of BHCexam has been moved [here](http://docs.mathcrowd.cn/zh_CN/latest/advances/bhcexam.html).
+Documentation of BHCexam has been moved [here](http://docs.mathcrowd.cn/advances/bhcexam.html).
 
 
 
