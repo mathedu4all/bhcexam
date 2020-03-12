@@ -103,7 +103,16 @@
 %                         *****************
 
 
-\AtBeginDocument{\pagenumbering{arabic}} % 使用阿拉伯数字页码
+\AtBeginDocument{
+	\pagenumbering{arabic}  % 使用阿拉伯数字页码
+	\renewcommand{\parallel}{\mathrel{\mathpalette\new@parallel\relax}} % 重定义平行符号
+	\newcommand{\new@parallel}[2]{%
+		\begingroup
+		\sbox\z@{$#1T$}% get the height of an uppercase letter
+		\resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-5mu/$}}%
+		\endgroup
+	}
+}
 
 
 %
@@ -286,7 +295,7 @@
 	\fi
 }
 
-\newcommand{\subquestion}[1][0]{
+\newcommand{\subquestion}{
 	\stepcounter{Subquestion}
 	\if@list
 		\item[(\arabic{Subquestion}) ]
@@ -478,13 +487,7 @@
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\le}{\leqslant}
 \renewenvironment{split}{\begin{aligned}}{\end{aligned}}
-\renewcommand{\parallel}{\mathrel{\mathpalette\new@parallel\relax}}
-\newcommand{\new@parallel}[2]{%
-	\begingroup
-	\sbox\z@{$#1T$}% get the height of an uppercase letter
-	\resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-5mu/$}}%
-	\endgroup
-}
+
 
 
 \endinput
