@@ -9,7 +9,7 @@ The BHCexam document class is no longer designed for typesetting math papers by 
 
 * v0.5 is a stable version with documentation. [download](https://github.com/mathedu4all/bhcexam/releases/download/v0.5/bhcexam.zip).
 
-* since v1.0, BHCexam is completely rewritten with article class with documentation [here](http://docs.mathcrowd.cn/advances/bhcexam.html).  [download v1.3](https://github.com/mathedu4all/bhcexam/releases/download/v1.3/bhcexam.zip).
+* since v1.0, BHCexam is completely rewritten with article class with documentation [here](http://docs.mathcrowd.cn/advances/bhcexam.html).  [download v1.4](https://github.com/mathedu4all/bhcexam/releases/download/v1.4/bhcexam.zip).
 
 
 #### Author
