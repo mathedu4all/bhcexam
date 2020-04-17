@@ -44,6 +44,7 @@
  % answers 显示解析
  % adobe 使用adobe字体
  % ubuntu 使用ubuntu字体
+ % fandol 使用fandol字体，多数linux系统无需额外配置字体可运行
  % windows 使用windows字体
  % mac 使用mac字体
  % csize5 默认字体大小为五号
@@ -63,6 +64,7 @@
 \newcommand\@fontset{windows}
 \DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
+\DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 \DeclareOption{mac}{\renewcommand\@fontset{mac}}
 \DeclareOption{windows}{\renewcommand\@fontset{windowsnew}}
 
