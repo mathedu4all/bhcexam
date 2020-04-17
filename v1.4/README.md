@@ -15,6 +15,7 @@ Documentation of BHCexam has been moved [here](http://docs.mathcrowd.cn/advances
 * 
 * support recursive subquestions;
 * ``\parallel`` rewrited;
+* add ``fandol`` global option for compiling without extra fonts in most Linux distributions
 
 ##### version 1.3
 
