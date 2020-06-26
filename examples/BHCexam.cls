@@ -45,6 +45,7 @@
  % adobe 使用adobe字体
  % ubuntu 使用ubuntu字体
  % windows 使用windows字体
+ % fandol 使用fandol字体，随texlive默认安装
  % mac 使用mac字体
  % csize5 默认字体大小为五号
  % csize4 默认字体大小为小四
@@ -65,6 +66,7 @@
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
 \DeclareOption{mac}{\renewcommand\@fontset{mac}}
 \DeclareOption{windows}{\renewcommand\@fontset{windowsnew}}
+\DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 
 \newif\if@twocolumn  \@twocolumnfalse
 \DeclareOption{twocolumn}{\@twocolumntrue}

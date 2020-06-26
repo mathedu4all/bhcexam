@@ -19,6 +19,7 @@ BHCexam的相关帮助文档:
 * **version 1.5** (2020.6)
   * `questions` 环境新增 `r` 选项，重置题组的编号;
   * 在 `master` 分支中清理历史版本;
+  * 新增 `fandol` 宏包选项以支持 `fandol` 字体;
 * **version 1.4** (2020.5)
   * 支持`subquestion`环境的嵌套;
   * `\parallel` 命令重定义;
@@ -35,10 +36,10 @@ BHCexam的相关帮助文档:
 * **version 1.0** (2019.5)
   * 弃用 `exam` 而改用 `article` 为基宏包类
 
-## 作者
+## Contributors
 
-* [![@mathedu4all](https://avatars3.githubusercontent.com/u/11254711?s=64&v=4)](https://github.com/mathedu4all)[**mathedu4all** mathedu4all](https://github.com/mathedu4all)
-* [![@CamuseCao](https://avatars1.githubusercontent.com/u/38849270?s=64&v=4)](https://github.com/CamuseCao)[**CamuseCao** CamuseCao](https://github.com/CamuseCao)
+* Bao Hongchang - @mathedu4all,  charles@mathcrowd.cn
+* CamuseCao - @ CamuseCao, camusecao@gmail.com
 
 ## 社区其他项目
 
