@@ -27,8 +27,8 @@
 % The newest version of this documentclass should always be available
 % from my web page: https://github.com/mathedu4all/bhcexam
 
-\def\fileversion{1.3}
-\def\filedate{2020/03/30}
+\def\fileversion{1.5}
+\def\filedate{2020/06/26}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
@@ -96,6 +96,8 @@
 \RequirePackage{pifont} % 带圈数字\ding
 \RequirePackage{bbding} % 图案
 \RequirePackage{romannum} % 罗马数字
+\RequirePackage{enumitem}
+
 
 
 %                         *****************
@@ -108,8 +110,8 @@
 	\renewcommand{\parallel}{\mathrel{\mathpalette\new@parallel\relax}} % 重定义平行符号
 	\newcommand{\new@parallel}[2]{%
 		\begingroup
-		\sbox\z@{$#1T$}% get the height of an uppercase letter
-		\resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-5mu/$}}%
+		\sbox\z@{高度}% get the height of an uppercase letter
+		\resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-10mu/$}}%
 		\endgroup
 	}
 }
@@ -201,7 +203,6 @@
 \newcounter{Question}
 \newcounter{Example}
 \newcounter{Exercise}
-\newcounter{Subquestion}[Question]
 \newcounter{Method}[Question]
 
 \newif\if@showscore
@@ -210,6 +211,8 @@
 \@showskipfalse
 \newif\if@showparen
 \@showparenfalse
+\newif\if@resetcounter
+\@resetcounterfalse
 \newlength{\myvertspace}
 
 
@@ -244,8 +247,11 @@
 	\@tfor \@opt :=#1\do
 		{\if\@opt s\global\@showscoretrue\fi
 		 \if\@opt t\global\@showskiptrue\fi
-	 	 \if\@opt p\global\@showparentrue\fi}
-	 
+	 	 \if\@opt p\global\@showparentrue\fi
+ 	 	 \if\@opt r\global\@resetcountertrue\fi}
+  	\if@resetcounter
+  		\setcounter{Question}{0}
+	 \fi
 	\if@list
 		\list{\arabic{Question}.}{\setlength{\leftmargin}{0pt}}
 	\else
@@ -303,35 +309,16 @@
 }
 
 % 定义小问环境
-\newenvironment{subquestions}{
-	\if@list
-		\list{(\arabic{Subquestion})}{\usecounter{Subquestion}}
-	\else
-		\par \begingroup \par
-	\fi
-}{
-	\if@list
-		\endlist
-	\else
-		\par \endgroup \par
-	\fi
-}
+\newlist{subquestions}{enumerate}{2}
+\setlist[subquestions,1]{label=(\arabic*)}
+\setlist[subquestions,2]{label=(\roman*)}
 
 % 定义新增小问命令
-\newcommand{\subquestion}{
-
-	\if@list
-		\item
-	\else
-		\stepcounter{Subquestion}
-		\par
-		(\arabic{Subquestion}) 
-	\fi
-} 
+\newcommand{\subquestion}{\item} 
 
 \newenvironment{solution}[1]{
 	\setlength{\myvertspace}{#1}
-	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace*{\myvertspace} \fi \bgroup\fi \songti
+	\par \if@printanswers \par \color{red} \begingroup \else \if@showskip \vspace*{\myvertspace} \fi \setbox\z@\vbox\bgroup\fi \songti
 }{
 	\par \if@printanswers \endgroup \color{black} \else \egroup \fi \par
 }
