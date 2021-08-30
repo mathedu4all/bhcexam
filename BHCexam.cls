@@ -27,8 +27,8 @@
 % The newest version of this documentclass should always be available
 % from my web page: https://github.com/mathedu4all/bhcexam
 
-\def\fileversion{1.5}
-\def\filedate{2020/06/26}
+\def\fileversion{1.6}
+\def\filedate{2021/08/30}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
@@ -79,7 +79,7 @@
 \ProcessOptions\relax
 \LoadClass{article}
 
-\RequirePackage[fontset = \@fontset, zihao = \@fontsize]{ctex}
+\RequirePackage[fontset = \@fontset, zihao = \@fontsize, punct=kaiming]{ctex}
 \ctexset{linestretch = 4, autoindent = 0pt}
 
 
@@ -93,8 +93,6 @@
 \RequirePackage{etoolbox} 
 \RequirePackage{amsmath,amsmath,amssymb} % ams数学相关
 \RequirePackage{unicode-math}
-\setmainfont{STIX2Text-Regular.otf}
-\setmathfont{STIX2Math.otf}
 \RequirePackage{pifont} % 带圈数字\ding
 \RequirePackage{bbding} % 图案
 \RequirePackage{romannum} % 罗马数字
@@ -387,7 +385,7 @@
 			B.~#2~~~\\
 			C.~#3~~~\\
 		\end{tabularx}
-	}
+	}%
 	{
 		\ifthenelse{\lengthtest{\maxlength>0.2\linewidth}}
 		{
@@ -396,7 +394,7 @@
 				A.~#1~~~ & B.~#2~~~\\
 				C.~#3~~~ & \\
 			\end{tabularx}
-		}
+		}%
 		{
 			\begin{tabularx}{\linewidth}{XXXX}
 				\setlength\tabcolsep{0pt}
@@ -427,7 +425,7 @@
 			C.~#3~~~\\
 			D.~#4~~~\\
 		\end{tabularx}
-	}
+	}%
 	{
 		\ifthenelse{\lengthtest{\maxlength>0.2\linewidth}}
 		{
@@ -436,13 +434,13 @@
 				A.~#1~~~ & B.~#2~~~\\
 				C.~#3~~~ & D.~#4~~~\\
 			\end{tabularx}
-		}
+		}%
 		{
 			\begin{tabularx}{\linewidth}{XXXX}
 				\setlength\tabcolsep{0pt}
 				A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~\\ 
 			\end{tabularx}
-		}
+		}%
 	}
 	\unskip \unskip 
 }
@@ -458,10 +456,9 @@
 	\settowidth{\choicelengthe}{E.~#5~~~}
 	\ifthenelse{\lengthtest{\choicelengtha>\choicelengthb}}{\setlength{\maxlength}{\choicelengtha}}{\setlength{\maxlength}{\choicelengthb}}
 	\ifthenelse{\lengthtest{\choicelengthc>\maxlength}}{\setlength{\maxlength}{\choicelengthc}}{}
-	\ifthenelse{\lengthtest{\choicelengthd>\maxlength}}{\setlength{\maxlength}{\choicelengthd}}{}	\ifthenelse{\lengthtest{\choicelengthe>\maxlength}}{\setlength{\maxlength}{\choicelengthe}}{}
-	
-	\ifthenelse{\lengthtest{\maxlength>0.4\linewidth}}
-	{
+	\ifthenelse{\lengthtest{\choicelengthd>\maxlength}}{\setlength{\maxlength}{\choicelengthd}}{}
+	\ifthenelse{\lengthtest{\choicelengthe>\maxlength}}{\setlength{\maxlength}{\choicelengthe}}{}
+	\ifthenelse{\lengthtest{\maxlength>0.4\linewidth}}{
 		\begin{tabularx}{\linewidth}{X}
 			\setlength\tabcolsep{0pt}
 			A.~#1~~~\\
@@ -470,7 +467,7 @@
 			D.~#4~~~\\
 			E.~#5~~~\\
 		\end{tabularx}
-	}
+	}%
 	{
 		\ifthenelse{\lengthtest{\maxlength>0.2\linewidth}}
 		{
@@ -480,7 +477,7 @@
 				C.~#3~~~ & D.~#4~~~\\
 				E.~#5~~~ &         \\
 			\end{tabularx}
-		}
+		}%
 		{
 			\begin{tabularx}{\linewidth}{XXXX}
 				\setlength\tabcolsep{0pt}
@@ -488,7 +485,7 @@
 				E.~#5~~~  &          &          &          \\
 			\end{tabularx}
 		}
-	}
+	}%
 	\unskip \unskip 
 }
 
@@ -516,7 +513,7 @@
 			E.~#5~~~\\
 			F.~#6~~~\\
 		\end{tabularx}
-	}
+	}%
 	{
 		\ifthenelse{\lengthtest{\maxlength>0.2\linewidth}}
 		{
@@ -526,14 +523,14 @@
 				C.~#3~~~ & D.~#4~~~\\
 				E.~#5~~~ & F.~#6~~~\\
 			\end{tabularx}
-		}
+		}%
 		{
 			\begin{tabularx}{\linewidth}{XXXX}
 				\setlength\tabcolsep{0pt}
 				A.~#1~~~  & B.~#2~~~ & C.~#3~~~ & D.~#4~~~ \\
 				E.~#2~~~  & F.~#6~~~ &          &          \\
 			\end{tabularx}
-		}
+		}%
 	}
 	\unskip \unskip 
 }

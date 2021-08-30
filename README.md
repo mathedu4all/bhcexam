@@ -16,6 +16,9 @@ BHCexam的相关帮助文档:
 
 ## 版本历史
 
+* **version 1.6** (2021.8)
+  * 不再使用`stix`数学字体
+  *  `ctex` 设置 `punct = kaiming`
 * **version 1.5** (2020.6)
   * `questions` 环境新增 `r` 选项，重置题组的编号;
   * 在 `master` 分支中清理历史版本;
@@ -32,7 +35,6 @@ BHCexam的相关帮助文档:
 * **version 1.1** (2020.1)
   * 新增对A3双栏版式的支持
   * 新增列表样式的试题
-
 * **version 1.0** (2019.5)
   * 弃用 `exam` 而改用 `article` 为基宏包类
 
