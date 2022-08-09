@@ -27,8 +27,8 @@
 % The newest version of this documentclass should always be available
 % from my web page: https://github.com/mathedu4all/bhcexam
 
-\def\fileversion{1.6}
-\def\filedate{2021/08/30}
+\def\fileversion{1.7}
+\def\filedate{2022/07/29}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
@@ -47,8 +47,6 @@
  % windows 使用windows字体
  % fandol 使用fandol字体，随texlive默认安装
  % mac 使用mac字体
- % csize5 默认字体大小为五号
- % csize4 默认字体大小为小四
  % list 以列表项目格式显示试题
  % twocolumn 使用A3纸张并分栏
   
@@ -56,16 +54,11 @@
 \newif\if@printanswers \@printanswersfalse
 \DeclareOption{answers}{\@printanswerstrue}
 
-\newcommand\@fontsize{false}
-\DeclareOption{csize5}{\renewcommand\@fontsize{5}}
-\DeclareOption{csize4}{\renewcommand\@fontsize{-4}}
-
-
 \newcommand\@fontset{windows}
 \DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
 \DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
 \DeclareOption{mac}{\renewcommand\@fontset{mac}}
-\DeclareOption{windows}{\renewcommand\@fontset{windowsnew}}
+\DeclareOption{windows}{\renewcommand\@fontset{windows}}
 \DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 
 \newif\if@twocolumn  \@twocolumnfalse
@@ -79,7 +72,7 @@
 \ProcessOptions\relax
 \LoadClass{article}
 
-\RequirePackage[fontset = \@fontset, zihao = \@fontsize, punct=kaiming]{ctex}
+\RequirePackage[fontset = \@fontset, punct=kaiming]{ctex}
 \ctexset{linestretch = 4, autoindent = 0pt}
 
 

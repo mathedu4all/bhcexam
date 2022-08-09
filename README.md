@@ -11,11 +11,11 @@ BHCexam 自 0.5 版本起，针对 [橘子数学开源题库社区](https://www.
 BHCexam的相关帮助文档:
 
 * [BHCexam文档](http://docs.mathcrowd.cn/advances/bhcexam.html)
-* [如何编译橘子数学的 .tex 文件](http://docs.mathcrowd.cn/howtos/how_to_compile_mathcrowd_tex.html)
-* [如何将Word/PDF文件中的内容转为$\LaTeX$](http://docs.mathcrowd.cn/howtos/how_to_import_from_word.html)
 
 ## 版本历史
 
+* **version 1.7** (2022.8)
+  * 针对TeXLive 2022, 修正``ctex``的字号、字体设置. 
 * **version 1.6** (2021.8)
   * 不再使用`stix`数学字体
   *  `ctex` 设置 `punct = kaiming`
@@ -52,8 +52,6 @@ BHCexam的相关帮助文档:
 * [mathcrowd-docs](https://github.com/mathedu4all/mathcrowd-docs)
 
   橘子数学社区文档.
-
-
 
 ------
 
