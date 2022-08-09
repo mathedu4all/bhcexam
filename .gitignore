@@ -1,3 +1,5 @@
 fonts
 Makefile
 .vscode
+install.sh
+dist
