@@ -1,68 +1,21 @@
 % BHCexam.cls
-%
-% An exam class designed for mathematics teacher in China.
-% Since 2016, it was used by mathcrowd.cn ( an opensource math exam database) as the default class to export exam papers.
-%
+% Version: 1.8
+% Date: 2024/10/15
+% Author: BAO HONG CHANG
+% Description: An exam class orignally designed for mathematics teachers in China.
+%              Used by Mathcrowd.cn since 2016 as the default class to export exam papers from database.
+% License: LaTeX Project Public License (LPPL), version 1.3 or later.
+% Documentation: https://lab.mathcrowd.cn/bhcexam/docs
+% Support: https://github.com/mathedu4all/bhcexam/issues
 
-%% BHCexam.cls
-%% Copyright (c) 2011-2022 BAO HONG CHANG
-%
-% This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
-% of this license or (at your option) any later version.
-% The latest version of this license is in
-%   http://www.latex-project.org/lppl.txt
-% and version 1.3 or later is part of all distributions of LaTeX
-% version 2003/12/01 or later.
-%
-% This work has the LPPL maintenance status "author-maintained".
-% 
-% This work consists of the files BHCexam.cls.
-% Documation on https://docs.mathcrowd.cn/advances/bhcexam.html
-% Support on https://github.com/mathedu4all/bhcexam/issues
-%
-
-%%% BAO HONG CHANG
-%%% Mathcrowd Inc.
-%%% Shanghai
-%%% charles@mathcrowd.cn
-
-% The newest version of this documentclass should always be available
-% from my web page: https://github.com/mathedu4all/bhcexam
-
-\def\fileversion{1.7}
-\def\filedate{2022/07/29}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{BHCexam}[\filedate\space Version \fileversion\space by
- BAO HONG CHANG]
- 
- %                         *****************
- %                         **   宏包选项   **
- %                         *****************
- 
- 
- % 文档类支持以下宏包选项:
- 
- % answers 显示解析
- % adobe 使用adobe字体
- % ubuntu 使用ubuntu字体
- % windows 使用windows字体
- % fandol 使用fandol字体，随texlive默认安装
- % mac 使用mac字体
- % list 以列表项目格式显示试题
- % twocolumn 使用A3纸张并分栏
-  
+\ProvidesClass{BHCexam}[2024/10/15 Version 1.8 by BAO HONG CHANG]
 
+ 
+% Options
 \newif\if@printanswers \@printanswersfalse
 \DeclareOption{answers}{\@printanswerstrue}
-
-\newcommand\@fontset{windows}
-\DeclareOption{adobe}{\renewcommand\@fontset{adobe}}
-\DeclareOption{ubuntu}{\renewcommand\@fontset{ubuntu}}
-\DeclareOption{mac}{\renewcommand\@fontset{mac}}
-\DeclareOption{windows}{\renewcommand\@fontset{windows}}
-\DeclareOption{fandol}{\renewcommand\@fontset{fandol}}
 
 \newif\if@twocolumn  \@twocolumnfalse
 \DeclareOption{twocolumn}{\@twocolumntrue}
@@ -70,77 +23,54 @@
 \newif\if@list  \@listfalse
 \DeclareOption{list}{\@listtrue}
 
+% Fontset, zihao, linestretch options
+\def\@fontset{none}
+\def\@zihao{5}
+\def\@linestretch{4}
+\newif\if@fontsetspecified \@fontsetspecifiedfalse
+\DeclareOption{fontset}{\renewcommand{\@fontset}{#1}\@fontsetspecifiedtrue}
+\DeclareOption{zihao}{\renewcommand{\@zihao}{#1}}
+\DeclareOption{linestretch}{\renewcommand{\@linestretch}{#1}}
+
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
+
+% Load required packages
 \LoadClass{article}
 
-\RequirePackage[fontset = \@fontset, punct=kaiming]{ctex}
-\ctexset{linestretch = 4, autoindent = 0pt}
-
-
-%                    *****************************
-%                    **        加载其他宏包       **
-%                    *****************************
-
-\RequirePackage{tabularx, ifthen} % 排选项用
-\RequirePackage{xcolor,graphicx,caption} % 彩色、图片、图释
-\RequirePackage{geometry,fancyhdr} % 纸张、边距、页眉、页脚
-\RequirePackage{etoolbox} 
-\RequirePackage{amsmath,amsmath,amssymb} % ams数学相关
-\RequirePackage{unicode-math}
-\RequirePackage{pifont} % 带圈数字\ding
-\RequirePackage{bbding} % 图案
-\RequirePackage{romannum} % 罗马数字
-\RequirePackage{enumitem}
-
-
-
-%                         *****************
-%                         **   页面设置   **
-%                         *****************
-
-
-\AtBeginDocument{
-	\pagenumbering{arabic}  % 使用阿拉伯数字页码
-	\renewcommand{\parallel}{\mathrel{\mathpalette\new@parallel\relax}} % 重定义平行符号
-	\newcommand{\new@parallel}[2]{%
-		\begingroup
-		\sbox\z@{高度}% get the height of an uppercase letter
-		\resizebox{!}{\ht\z@}{\raisebox{\depth}{$\m@th#1/\mkern-10mu/$}}%
-		\endgroup
-	}
-}
-
-
-%
-% 双栏显示
-%
-\if@twocolumn
-\geometry{a3paper,landscape, twocolumn,columnsep=40mm,left=50mm,right=30mm,top=35mm,bottom=25mm,headheight=20mm}
+% Conditional loading of ctex with fontset option
+\if@fontsetspecified
+    \RequirePackage[fontset = \@fontset, punct=kaiming, zihao = \@zihao]{ctex}
 \else
-\geometry{a4paper,left=30mm,right=30mm,top=35mm,bottom=25mm, headheight=20mm}
+    \RequirePackage[punct=kaiming, zihao = \@zihao]{ctex}
 \fi
 
-%
-% 图释
-%
+\ctexset{linestretch = \@linestretch, autoindent = 0pt}
+\RequirePackage{tabularx, ifthen, xcolor, graphicx, caption}
+\RequirePackage{geometry, fancyhdr, etoolbox, amsmath, amssymb, unicode-math, pifont, bbding, romannum, enumitem}
+
+% Page setup
+\AtBeginDocument{
+    \pagenumbering{arabic}
+}
+
+% Two-column layout
+\if@twocolumn
+    \geometry{a3paper,landscape, twocolumn,columnsep=40mm,left=50mm,right=30mm,top=35mm,bottom=25mm,headheight=20mm}
+\else
+    \geometry{a4paper,left=30mm,right=30mm,top=35mm,bottom=25mm, headheight=20mm}
+\fi
+
+% Figure caption setup
 \captionsetup[figure]{font=small,belowskip=0pt}
 
 
-
-%                         *****************
-%                         **    试卷头    **
-%                         *****************
-
-
-
+% Title page setup
 \gdef\@subtitle{}
 \gdef\@notice{}
 \gdef\@author{}
 \gdef\@date{}
-
-
 
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\title}[1]{\gdef\@title{#1}}
@@ -188,31 +118,37 @@
 	\songti \normalsize
 \endgroup}
 
+% Set default array and baseline stretch
 \renewcommand\arraystretch{1.5}
 \renewcommand{\baselinestretch}{1.5}
 
-%                    ***************************
-%                    **    试题、解答环境定义   **
-%                    ***************************
-
+% Define counters and flags
 \newcounter{Group}
 \newcounter{Question}
 \newcounter{Example}
 \newcounter{Exercise}
 \newcounter{Method}[Question]
 
-\newif\if@showscore
-\@showscorefalse
-\newif\if@showskip
-\@showskipfalse
-\newif\if@showparen
-\@showparenfalse
-\newif\if@resetcounter
-\@resetcounterfalse
+\newif\if@showscore \@showscorefalse
+\newif\if@showskip \@showskipfalse
+\newif\if@showparen \@showparenfalse
+\newif\if@resetcounter \@resetcounterfalse
 \newlength{\myvertspace}
 
+% Custom math commands
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand{\gt}{>}
+\newcommand{\lt}{<}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\le}{\leqslant}
+\renewenvironment{split}{\begin{aligned}}{\end{aligned}}
+\renewcommand\parallel{\mathrel{/\mskip-2.5mu/}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 
-% 定义题组环境
+% Define environments (groups, questions, solution)
 \newenvironment{groups}{
 	\if@list
 		\list{\heiti\chinese{Group}.}{\usecounter{Group}}
@@ -227,7 +163,7 @@
 	\fi
 }
 
-% 定义新增题组命令
+% Define commands (group, question, example, exercise, subquestion)
 \newcommand{\group}[2]{
 	\if@list
 		\item \heiti{#1} \quad \kaishu \small #2 \songti \normalsize \par
@@ -238,7 +174,6 @@
 
 }
 
-% 定义试题环境
 \newenvironment{questions}[1][]{
 	\@tfor \@opt :=#1\do
 		{\if\@opt s\global\@showscoretrue\fi
@@ -265,7 +200,6 @@
 	\global\@showparenfalse
 }
 
-% 定义新增试题命令
 \newcommand{\question}[1][0]{
 	\stepcounter{Question}
 	\if@list
@@ -278,7 +212,6 @@
 	\fi
 }
 
-% 定义新增例题命令
 \newcommand{\example}[1][0]{
 	\stepcounter{Example}
 	\if@list
@@ -291,7 +224,6 @@
 	\fi
 }
 
-% 定义新增习题命令
 \newcommand{\exercise}[1][0]{
 	\stepcounter{Exercise}
 	\if@list
@@ -304,13 +236,15 @@
 	\fi
 }
 
-% 定义小问环境
 \newlist{subquestions}{enumerate}{2}
 \setlist[subquestions,1]{label=(\arabic*)}
 \setlist[subquestions,2]{label=(\roman*)}
+\newcommand{\subquestion}[1][0]{
+    \item \if@showscore \kaishu ( #1 分) \songti \fi
+}
 
-% 定义新增小问命令
-\newcommand{\subquestion}{\item} 
+
+% Define hint, method, and methodonly commands
 
 \newenvironment{solution}[1]{
 	\setlength{\myvertspace}{#1}
@@ -337,6 +271,8 @@
 	\dotfill 本步骤 #1 分， 累计 #2 分
 	\par}
 
+% Define multiple-choice commands
+
 \makeatletter
 \newcommand{\build}[2]{\leavevmode
 	\count@=\z@ \toks@={}%
@@ -346,7 +282,6 @@
 	\repeat
 	\the\toks@}
 \makeatletter
-
 \newlength{\keylength}
 \newcommand{\key}[1]{
 	\if@printanswers
@@ -363,7 +298,6 @@
 \newlength{\choicelengthe}
 \newlength{\maxlength}
 
-% 三个选项
 \newcommand{\threechoices}[3]{
 	\if@showparen \dotfill (\qquad) \fi
 	\par
@@ -401,7 +335,6 @@
 	\unskip \unskip 
 }
 
-% 四个选项
 \newcommand{\fourchoices}[4]{
 	\if@showparen \dotfill (\qquad) \fi
 	\par
@@ -441,7 +374,6 @@
 	\unskip \unskip 
 }
 
-% 五个选项
 \newcommand{\fivechoices}[5]{
 	\if@showparen \hfill \dotfill (\quad) \fi
 	\par
@@ -485,7 +417,6 @@
 	\unskip \unskip 
 }
 
-% 六个选项
 \newcommand{\sixchoices}[6]{
 	\if@showparen \hfill \dotfill (\quad) \fi
 	\par
@@ -530,21 +461,6 @@
 	}
 	\unskip \unskip 
 }
-
-
-%                    ***************************
-%                    **   CUSTOMIZED COMMAND  **
-%                    ***************************
-
-\newcommand\abs[1]{\left|#1\right|}
-\newcommand{\gt}{>}
-\newcommand{\lt}{<}
-\renewcommand{\geq}{\geqslant}
-\renewcommand{\ge}{\geqslant}
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\le}{\leqslant}
-\renewenvironment{split}{\begin{aligned}}{\end{aligned}}
-
 
 
 \endinput

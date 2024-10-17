@@ -1,28 +1,55 @@
 # BHCexam
 
-[中文版](./README-zh.md)
+[中文文档](./README-zh.md)
 
-BHCexam is an exam class designed for mathematics teacher in China.
+The `BHCexam.cls` is a LaTeX document class designed for typesetting exams. It is currently used by the [Orange Math Question Bank](https://database.mathcrowd.cn) to generate exam PDF files. The class supports the following features:
 
-Now it is used by [mathcrowd.cn](www.mathcrowd.cn) ( an opensource math exam database) as the default class to export exam papers in pdf.
+- Support for configuring whether to display answers.
+- Ability to set whether the document is formatted in multiple columns.
+- Alignment customization options.
+- Automatic alignment of option lengths to a grid.
+- Ability to adjust the width of blank lines based on the length of fill-in-the-blank answers.
+- Option to display or hide scores for question groups.
+- Customizable answer space for each question.
+- Ability to restart numbering in question groups.
+- Support for sub-questions and nested sub-questions in short-answer questions.
 
-Using bhcexam you can
+## Version History
 
-* separate the format and the content very well;
-* export both teacher paper and student paper;
-* typeset multiple choice questions with 3-6 options keeping adaptively neat alignment;
-* typeset cloze questions with an adaptively underline;
-* typeset questions with subquestions in list;
-* group questions  in list to control whether to show score, leave spacing, initialize question number;
-* and more (see [BHCexam Documentation](http://docs.mathcrowd.cn/advances/bhcexam.html)).
+* **version 1.8** (October 2024)
+    * Added `fontset` and `zihao` options to directly pass to `ctex`.
+    * Support for adding scores to `\subquestion`.
+    * Reorganized document and package comments.
+    * Redefined some commands (`\parallel`, `\Re`, `\Im`) to align with national standards.
+* **version 1.7** (August 2022)
+    * Adjusted `ctex` font and size settings for TeXLive 2022.
+* **version 1.6** (August 2021)
+    * Discontinued use of the `stix` math fonts.
+    * Set `punct = kaiming` in `ctex`.
+* **version 1.5** (June 2020)
+    * Added the `r` option to the `questions` environment to reset numbering within question groups.
+    * Cleaned up historical versions in the `master` branch.
+    * Added the `fandol` package option to support the `fandol` font family.
+* **version 1.4** (May 2020)
+    * Support for nested `subquestion` environments.
+    * Redefined the `\parallel` command.
+* **version 1.3** (March 2020)
+    * Added `\sixchoices` and `\threechoices` commands to support 3 and 6-option multiple-choice questions with smart line-breaking and option alignment.
+* **version 1.2** (March 2020)
+    * Support for Apple fonts.
+    * Implemented `stix` math fonts.
+    * Added support for right-aligned parentheses in multiple-choice questions.
+* **version 1.1** (January 2020)
+    * Added support for A3 dual-column layout.
+    * Introduced list-style question formatting.
+* **version 1.0** (May 2019)
+    * Switched from using the `exam` class to the `article` class as the base class.
 
-## Authors and Contributors
+## Contributors
 
-* Bao Hongchang <charles@mathcrowd.cn>
-* CamuseCao <camusecao@gmail.com>
+* Bao Hongchang - @mathedu4all, charles@mathcrowd.cn
+* CamuseCao - @CamuseCao, camusecao@gmail.com
 
 ------
 
-This work may be distributed and/or modified under the conditions of
-the LaTeX Project Public License, either version 1.3 of this license
-or (at your option) any later version.
+This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version 1.3 of this license or (at your option) any later version.
