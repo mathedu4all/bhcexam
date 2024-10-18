@@ -2,6 +2,10 @@
 
 [中文文档](./README-zh.md)
 
+[Official Site (Chinese)](https://lab.mathcrowd.cn/bhcexam) | [Documentation (Chinese）](https://lab.mathcrowd.cn/bhcexam/docs) | [Issues](https://github.com/mathedu4all/bhcexam/issues)
+
+[Try BHCexam.cls on Overleaf](https://www.overleaf.com/latex/templates/bhcexam/kctdsdcgzyzm)
+
 The `BHCexam.cls` is a LaTeX document class designed for typesetting exams. It is currently used by the [Mathcrowd Problem Database](https://database.mathcrowd.cn) to generate exam PDF files. The class supports the following features:
 
 - Support for configuring whether to display answers.
@@ -13,13 +17,6 @@ The `BHCexam.cls` is a LaTeX document class designed for typesetting exams. It i
 - Customizable answer space for each question.
 - Ability to restart numbering in question groups.
 - Support for sub-questions and nested sub-questions in short-answer questions.
-
-[Official Site (Chinese)](https://lab.mathcrowd.cn/bhcexam)
-
-[Documentation（Chinese）](https://lab.mathcrowd.cn/bhcexam/docs)
-
-[Issues](https://github.com/mathedu4all/bhcexam/issues)
-
 
 ## Version History
 

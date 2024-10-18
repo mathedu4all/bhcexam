@@ -2,6 +2,10 @@
 
 [English](./README.md)
 
+[官方网站](https://lab.mathcrowd.cn/bhcexam) | [文档](https://lab.mathcrowd.cn/bhcexam/docs) | [提交建议/报告问题](https://github.com/mathedu4all/bhcexam/issues)
+
+[在Overleaf上试用BHCexam.cls](https://www.overleaf.com/latex/templates/bhcexam/kctdsdcgzyzm)
+
 BHCexam.cls 提供了一个用于排版试卷LaTeX文档类.
 [橘子数学题库](https://database.mathcrowd.cn) 正在使用此文档来导出试卷PDF文件. 该文档类可以实现：
 
@@ -22,13 +26,6 @@ BHCexam.cls 提供了一个用于排版试卷LaTeX文档类.
 - 支持设置题组是否重新开始编号
 
 - 支持简答题中的小问及小问的小问
-
-[官方网站](https://lab.mathcrowd.cn/bhcexam)
-
-[文档](https://lab.mathcrowd.cn/bhcexam/docs)
-
-[提交建议/报告问题](https://github.com/mathedu4all/bhcexam/issues)
-
 
 ## 版本历史
 
