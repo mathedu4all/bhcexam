@@ -23,8 +23,20 @@ BHCexam.cls 提供了一个用于排版试卷LaTeX文档类.
 
 - 支持简答题中的小问及小问的小问
 
+[官方网站](https://lab.mathcrowd.cn/bhcexam)
+
+[文档](https://lab.mathcrowd.cn/bhcexam/docs)
+
+[提交建议/报告问题](https://github.com/mathedu4all/bhcexam/issues)
+
+
 ## 版本历史
 
+* **version 1.8** (2024.10)
+    * 将 `fontset` 和 `zihao` 选项直接传递给 `ctex`
+    * 支持 `\subquestion` 添加分值
+    * 重新整理了文档及宏包的注释
+    * 针对国标对部分命令(`\parallel`, `\Re`, `\Im`)进行了重新定义.
 * **version 1.7** (2022.8)
   * 针对TeXLive 2022, 修正`ctex`的字号、字体设置. 
 * **version 1.6** (2021.8)
